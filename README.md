@@ -16,6 +16,24 @@ via [iO](https://www.iodigital.com/nl)
 De applicatie is gemaakt om een jongere doelgroep te actieveren en informeren met huidige themas die spellen rond
 klimaat en natuur.
 
-## ERD
+## ERD & Wireframes
 
-<iframe width="100%" height="500px" style="box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); border-radius:15px;" allowtransparency="true" allowfullscreen="true" scrolling="no" title="Embedded DrawSQL IFrame" frameborder="0" src="https://drawsql.app/teams/hoogeschool-rotterdam/diagrams/natuurmonumenten/embed"></iframe> 
+[Figma](https://www.figma.com/design/yTp2zN4YumlJ1DPWo0WqoX/TLE-2?node-id=0-1&t=g3tiqPHoMxn2j74G-1)
+[DrawSQL](https://drawsql.app/teams/hoogeschool-rotterdam/diagrams/natuurmonumenten/embed)
+
+## Code Rules & Conventions
+
+[laravel Best Practises & Conventions](https://github.com/alexeymezenin/laravel-best-practices)
+
+## Code snippets & Commands
+
+```pwsh
+# Run setup
+composer run setup
+
+# Run Vite dev server
+npm run dev
+
+# Run Vite Build
+npm run build
+```
