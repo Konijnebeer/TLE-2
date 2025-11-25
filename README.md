@@ -23,6 +23,8 @@ klimaat en natuur.
 
 ## Code Rules & Conventions
 
+[How to work with GitHub in PhpStorm](https://www.jetbrains.com/help/phpstorm/work-with-github-pull-requests.html)
+
 [laravel Best Practises & Conventions](https://github.com/alexeymezenin/laravel-best-practices)
 
 ## Code snippets & Commands
