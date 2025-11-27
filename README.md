@@ -27,6 +27,17 @@ klimaat en natuur.
 
 [laravel Best Practises & Conventions](https://github.com/alexeymezenin/laravel-best-practices)
 
+### Rules
+
+- Schrijf duidelijke commit messages.
+- Maak gebruik van feature branches.
+- Maak gebruik van Pull Requests.
+- Als je een Model maakt doe je dat met de `php artisan make:model Model --all`
+    - Hierdoor krijg je automatisch een migration, factory, seeder en controller erbij.
+- Review elkaars code bij Pull Requests.
+- Houd de codebase schoon en verwijder ongebruikte code.
+- Documenteer belangrijke delen van de codebase.
+
 ## Code snippets & Commands
 
 ```pwsh
