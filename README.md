@@ -14,7 +14,7 @@ via [iO](https://www.iodigital.com/nl)
 ## Concept
 
 De applicatie is gemaakt om een jongere doelgroep te actieveren en informeren met huidige themas die spellen rond
-klimaat en natuur.+
+klimaat en natuur.
 
 ## ERD & Wireframes
 
