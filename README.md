@@ -31,12 +31,16 @@ klimaat en natuur.
 
 - Schrijf duidelijke commit messages.
 - Maak gebruik van feature branches.
+    - Zorg er voor dat je `feature/story-#` gebruikt als naamgeving.
 - Maak gebruik van Pull Requests.
+    - Je kan een **issue** koppelen met `Closes: #issue-number` in de PR description.
 - Als je een Model maakt doe je dat met de `php artisan make:model Model --all`
     - Hierdoor krijg je automatisch een migration, factory, seeder en controller erbij.
 - Review elkaars code bij Pull Requests.
 - Houd de codebase schoon en verwijder ongebruikte code.
 - Documenteer belangrijke delen van de codebase.
+- Wanneer je de Database Schema wil veranderen doe je dit **altijd** via een nieuwe migration.
+- [Enums zijn php Enums hierdoor (gebruiken we geen strings tijdens checks maar de Enum).](https://medium.com/@zulfikarditya/using-php-enums-in-laravel-12-a-comprehensive-guide-af75689f88e8)
 
 ## Code snippets & Commands
 
@@ -50,3 +54,12 @@ npm run dev
 # Run Vite Build
 npm run build
 ```
+
+Als je reviewd kan je binnen een Pull Request comments toevoegen
+en kan je direct aanpassingens suggesties geven met de volgende snippets:
+
+\`\`\`suggestion
+
+Your suggestion for this code line
+
+\```
