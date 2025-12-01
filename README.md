@@ -14,7 +14,7 @@ via [iO](https://www.iodigital.com/nl)
 ## Concept
 
 De applicatie is gemaakt om een jongere doelgroep te actieveren en informeren met huidige themas die spellen rond
-klimaat en natuur.
+klimaat en natuur.+
 
 ## ERD & Wireframes
 
@@ -31,7 +31,9 @@ klimaat en natuur.
 
 - Schrijf duidelijke commit messages.
 - Maak gebruik van feature branches.
+    - Zorg er voor dat je `feature/story-#` gebruikt als naamgeving.
 - Maak gebruik van Pull Requests.
+    - Je kan een **issue** koppelen met `Closes: #issue-number` in de PR description.
 - Als je een Model maakt doe je dat met de `php artisan make:model Model --all`
     - Hierdoor krijg je automatisch een migration, factory, seeder en controller erbij.
 - Review elkaars code bij Pull Requests.
@@ -52,3 +54,12 @@ npm run dev
 # Run Vite Build
 npm run build
 ```
+
+Als je reviewd kan je binnen een Pull Request comments toevoegen
+en kan je direct aanpassingens suggesties geven met de volgende snippets:
+
+\`\`\`suggestion
+
+Your suggestion for this code line
+
+\```
