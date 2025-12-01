@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('nature_park_part', function (Blueprint $table) {
+        Schema::create('nature_park_part', function (Blueprint $table) {
             $table->foreignId('nature_park_id')->constrained()->onDelete('cascade');
             $table->foreignId('part_id')->constrained()->onDelete('cascade');
             $table->string('status')->default('pending');
