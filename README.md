@@ -37,6 +37,8 @@ klimaat en natuur.
 - Review elkaars code bij Pull Requests.
 - Houd de codebase schoon en verwijder ongebruikte code.
 - Documenteer belangrijke delen van de codebase.
+- Wanneer je de Database Schema wil veranderen doe je dit **altijd** via een nieuwe migration.
+- [Enums zijn php Enums hierdoor (gebruiken we geen strings tijdens checks maar de Enum).](https://medium.com/@zulfikarditya/using-php-enums-in-laravel-12-a-comprehensive-guide-af75689f88e8)
 
 ## Code snippets & Commands
 
