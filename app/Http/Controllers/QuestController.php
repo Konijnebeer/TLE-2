@@ -13,7 +13,7 @@ class QuestController extends Controller
      */
     public function index()
     {
-        //
+        return view('quest.index');
     }
 
     /**
