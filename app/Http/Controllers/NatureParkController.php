@@ -8,6 +8,17 @@ use App\Http\Requests\UpdateNatureParkRequest;
 
 class NatureParkController extends Controller
 {
+    public function slideshow()
+    {
+        $photos = glob(public_path('public/images/*.png'));
+
+        $photos = array_map(function ($path) {
+            return str_replace(public_path(), '', $path);
+        }, $photos);
+
+        return view('slideshow', compact('photos'));
+    }
+
     /**
      * Display a listing of the resource.
      */
