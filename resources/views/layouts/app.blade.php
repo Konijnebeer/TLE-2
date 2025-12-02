@@ -34,10 +34,6 @@
 
 <main>
     {{ $slot }}
-
-    <x-button variant="primary">
-        Test
-    </x-button>
 </main>
 
 <footer>
