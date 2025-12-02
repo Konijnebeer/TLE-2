@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestController;
+use App\Http\Controllers\NatureParkController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
+Route::get('/', [NatureParkController::class, 'slideshow']);
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');

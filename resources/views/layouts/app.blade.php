@@ -14,6 +14,7 @@
 
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
