@@ -11,15 +11,14 @@ class NatureParkController extends Controller
 {
     public function slideshow()
     {
-        // gebruik de map images als variabel files
-        $files = File::files(public_path('images'));
+        // gebruik de map carousel als variabel $files om de images in te laden
+        $files = File::files(public_path('carousel'));
         $images = [];
-        // for loop om alle files op te halen uit de map images
+        // for loop om alle fotos op te halen uit de map carousel
         foreach ($files as $file) {
             $images[] = $file->getFilename();
         }
-        return view('home')->with('images', $images);
-    }
+        return view('home')->with('images', $images);    }
 
     /**
      * Display a listing of the resource.
