@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NaturePark;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreNatureParkRequest;
 use App\Http\Requests\UpdateNatureParkRequest;
 
@@ -10,13 +11,14 @@ class NatureParkController extends Controller
 {
     public function slideshow()
     {
-        $photos = glob(public_path('public/images/*.png'));
-
-        $photos = array_map(function ($path) {
-            return str_replace(public_path(), '', $path);
-        }, $photos);
-
-        return view('slideshow', compact('photos'));
+        // gebruik de map images als variabel files
+        $files = File::files(public_path('images'));
+        $images = [];
+        // for loop om alle files op te halen uit de map images
+        foreach ($files as $file) {
+            $images[] = $file->getFilename();
+        }
+        return view('home')->with('images', $images);
     }
 
     /**

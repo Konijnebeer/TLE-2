@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/slideshow', [NatureParkController::class, 'slideshow']);
+Route::get('/', [NatureParkController::class, 'slideshow']);
 
 
 //Route::get('/dashboard', function () {
