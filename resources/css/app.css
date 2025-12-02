@@ -96,6 +96,16 @@ nav i {
     font-size: 40px;
 }
 
+.carousel-container {
+    max-height: calc(100vh - 175px);
+    overflow: hidden;
+}
+
+.carousel-container img {
+    height: 100%;
+    object-fit: cover;
+}
+
 .infobox-container {
     padding: 50px;
 }
