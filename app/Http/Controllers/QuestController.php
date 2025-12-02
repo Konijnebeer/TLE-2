@@ -37,7 +37,7 @@ class QuestController extends Controller
      */
     public function show(Quest $quest)
     {
-        //
+        return view('quest.show');
     }
 
     /**
