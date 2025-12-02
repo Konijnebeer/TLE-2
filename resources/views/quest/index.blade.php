@@ -1,20 +1,60 @@
 <x-app-layout>
-    <h1>
-        Missie Stroomvreter
-    </h1>
 
-    <x-infobox heading="Waarom?">
-        De stroomvreter bestrijden is essentieel! Het sluipverbruik in de klas zorgt voor onnodige CO2-uitstoot, wat klimaatverandering versnelt en de natuurgebieden van Natuurmonumenten beschadigt. Door één stekker uit het stopcontact te halen, bescherm jij de natuur direct, bespaar je de school geld én wordt een groene held voor je klasgenoten en thuis.
-    </x-infobox>
+    <section
+        id="mainSection"
+        class="bg-[url('/public/hooglander.png')] h-screen bg-no-repeat bg-cover bg-center overflow-hidden"
+    >
+    <h1 class="text-black m-4 text-center">Quests</h1>
 
-    <div class="aspect-video bg-gray-300 rounded-lg shadow-md flex items-center justify-center p-4 mb-6">
-        <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-        </svg>
-    </div>
 
-    <x-button>
-        Bekijk Quest
-    </x-button>
+        <a href="" id="button">
+            <div class=" flex border-2 border-solid shadow-lg border-black rounded-5 flex-row bg-white m-4 p-4 justify-between">
+
+                <div class="items-start">
+                    <h2>Stroomvreter</h2>
+                    <p>Start jouw (app naam) avontuur!</p>
+                </div>
+                <div class="flex  items-center ">
+                    <p>0/1</p>
+                </div>
+
+            </div>
+        </a>
+
+        <a href="" id="button">
+            <div class=" flex border-2 border-solid border-black rounded-5 flex-row bg-white m-4 p-4 justify-between">
+
+                <div class="items-start">
+                    <h2>Stroomvreter</h2>
+                    <p>Start jouw (app naam) avontuur!</p>
+                </div>
+                <div class="flex  items-center ">
+                    <p>0/1</p>
+                </div>
+
+            </div>
+        </a>
+
+        <a href="" id="button">
+            <div class=" flex border-2 border-solid border-black rounded-5 flex-row bg-white m-4 p-4 justify-between">
+
+                <div class="items-start">
+                    <h2>Stroomvreter</h2>
+                    <p>Start jouw (app naam) avontuur!</p>
+                </div>
+                <div class="flex  items-center ">
+                    <p>0/1</p>
+                </div>
+
+            </div>
+        </a>
+
+
+        <p class="text-center text-white">Kom snel terug voor meer quests!</p>
+
+
+
+    </section>
+
 
 </x-app-layout>
