@@ -31,7 +31,7 @@ class QuestSeeder extends Seeder
             ],
             [
                 'order_index' => 2,
-                'name' => 'Registratie',
+                'name' => 'Stroomvreter',
                 'description' => 'Type hieronder wat je allemaal hebt gevonden in je klaslokaal en hebt uitgezet! Wanneer je alles hebt ingevuld, klik dan op volgende.',
                 'media_url' => null,
                 'success_condition' => 'textField',

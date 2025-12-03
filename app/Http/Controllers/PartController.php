@@ -38,7 +38,7 @@ class PartController extends Controller
      */
     public function show(Quest $quest, Part $part)
     {
-        //
+        return view('quest.task', compact('quest', 'part'));
     }
 
     /**

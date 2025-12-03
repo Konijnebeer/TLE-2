@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestController;
-use App\Http\Controllers\PartsController;
+use App\Http\Controllers\PartController;
 use App\Http\Controllers\NatureParkController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('/quests', questController::class);
-    Route::resource('/quests.parts',PartsController::class);
+    Route::resource('/quests', QuestController::class);
+    Route::resource('/quests.parts',PartController::class);
 });
 
 require __DIR__ . '/auth.php';
