@@ -1,13 +1,10 @@
 <x-app-layout>
     <div class="p-4 space-y-10 pb-24">
 
-        <h1>Stroomvreter</h1>
+        <h1>{{ $quest->name }}</h1>
 
         <x-infobox heading="Waarom?">
-            De stroomvreter bestrijden is essentieel! Het sluipverbruik in de klas zorgt voor onnodige
-            CO2-uitstoot, wat klimaatverandering versnelt en de natuurgebieden van Natuurmonumenten beschadigt.
-            Door één stekker uit het stopcontact te halen, bescherm jij de natuur direct, bespaar je de school
-            geld én wordt een groene held voor je klasgenoten en thuis.
+            {{ $quest->description }}
         </x-infobox>
 
         <div class="aspect-video bg-gray-300 rounded-lg shadow-md flex items-center justify-center p-4 ">
