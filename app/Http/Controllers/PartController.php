@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Parts;
-use App\Http\Requests\StorePartsRequest;
-use App\Http\Requests\UpdatePartsRequest;
+use App\Models\Part;
+use App\Http\Requests\StorePartRequest;
+use App\Http\Requests\UpdatePartRequest;
 use App\Models\Quest;
 
-class PartsController extends Controller
+class PartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +28,7 @@ class PartsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePartsRequest $request, Quest $quest)
+    public function store(StorePartRequest $request, Quest $quest)
     {
         //
     }
@@ -36,7 +36,7 @@ class PartsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Quest $quest, Parts $parts)
+    public function show(Quest $quest, Part $part)
     {
         //
     }
@@ -44,7 +44,7 @@ class PartsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Quest $quest, Parts $parts)
+    public function edit(Quest $quest, Part $part)
     {
         //
     }
@@ -52,7 +52,7 @@ class PartsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePartsRequest $request, Quest $quest, Parts $parts)
+    public function update(UpdatePartRequest $request, Quest $quest, Parts $parts)
     {
         //
     }
@@ -60,7 +60,7 @@ class PartsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Quest $quest, Parts $parts)
+    public function destroy(Quest $quest, Part $part)
     {
         //
     }

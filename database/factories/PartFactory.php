@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Enums\QuestCategory;
+use App\Models\Quest;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Quest>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Part>
  */
-class QuestFactory extends Factory
+class PartFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,11 +18,12 @@ class QuestFactory extends Factory
     public function definition(): array
     {
         return [
+            'quest_id' => Quest::factory(),
+            'order_index' => $this->faker->numberBetween(1, 10),
             'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
-            'difficulty_level' => $this->faker->numberBetween(1, 5),
-            'category' => $this->faker->randomElement(QuestCategory::cases()),
-            'is_active' => true,
+            'media_url' => $this->faker->optional()->imageUrl(),
+            'success_condition' => $this->faker->optional()->text(100),
         ];
     }
 }

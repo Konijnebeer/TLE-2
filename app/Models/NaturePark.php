@@ -33,7 +33,7 @@ class NaturePark extends Model
      */
     public function parts()
     {
-        return $this->belongsToMany(Parts::class, 'nature_park_part')
+        return $this->belongsToMany(Part::class, 'nature_park_part')
             ->withPivot('status', 'completed_at')
             ->withTimestamps();
     }
