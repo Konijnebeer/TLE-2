@@ -106,6 +106,11 @@ nav i {
     object-fit: cover;
 }
 
+.popup {
+    position: fixed;
+    top: 25%;
+}
+
 .infobox-container {
     padding: 50px;
 }
@@ -119,15 +124,20 @@ nav i {
 
     width: fit-content;
     padding: 5px 10px;
+    z-index: 1;
+    position: relative;
 }
 
 .infobox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     background-color: var(--color-dark-blue);
     border-radius: 0.25rem;
     color: var(--color-white);
 
     margin-top: -30px;
     padding: 10px;
-    z-index: -1;
     position: relative;
 }
