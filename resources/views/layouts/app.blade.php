@@ -21,7 +21,9 @@
 <body>
 
 <header>
-    <img src="{{ url('/images/logo.png') }}" alt="">
+    <a href="{{ route('home') }}">
+        <img src="{{ url('/images/logo.png') }}" alt="">
+    </a>
     @guest
         <a href="{{ route('register')  }}">Login</a>
     @endguest
@@ -38,15 +40,15 @@
 
 <footer>
     <nav>
-        <a href="#">
+        <a href="{{ route('quests.index') }}">
             <i class="fa-solid fa-scroll"></i>
         </a>
 
-        <a href="#">
+        <a href="{{ route('home') }}">
             <i class="fa-solid fa-house"></i>
         </a>
 
-        <a href="#">
+        <a href="{{ route('profile.edit') }}">
             <i class="fa-solid fa-user"></i>
         </a>
     </nav>
