@@ -16,7 +16,7 @@ class QuestSeeder extends Seeder
     {
         // Create "Missie Stroomvreter" quest
         Quest::create([
-            'name' => 'Missie Stroomvreter',
+            'name' => 'Stroomvreter',
             'description' => 'De stroomvreter bestrijden is essentieel! Het sluipverbruik in de klas zorgt voor onnodige CO2-uitstoot, wat klimaatverandering versnelt en de natuurgebieden van Natuurmonumenten beschadigt. Door één stekker uit het stopcontact te halen, bescherm jij de natuur direct, bespaar je de school geld én word je een groene held voor je klasgenoten en thuis.',
             'difficulty_level' => 1,
             'category' => QuestCategory::NATURE,
@@ -24,22 +24,22 @@ class QuestSeeder extends Seeder
         ])->parts()->createMany([
             [
                 'order_index' => 1,
-                'name' => 'Wat moet je doen?',
+                'name' => 'Doel?',
                 'description' => 'Kijk nu 60 seconden lang rond in je klas. Zoek naar alles wat stroom verspilt zonder nut: opladers in het stopcontact, monitors op stand-by (rood of oranje lampje), of luidsprekers die onnodig aanstaan.',
                 'media_url' => null,
                 'success_condition' => 'timer:60s',
             ],
             [
                 'order_index' => 2,
-                'name' => 'Stroomvreter',
+                'name' => 'Check!',
                 'description' => 'Type hieronder wat je allemaal hebt gevonden in je klaslokaal en hebt uitgezet! Wanneer je alles hebt ingevuld, klik dan op volgende.',
                 'media_url' => null,
                 'success_condition' => 'textField',
             ],
             [
                 'order_index' => 3,
-                'name' => 'Voldaan',
-                'description' => 'Voldaan! Je hebt de eerste missie voltooid en de Stroomvreter is verslagen! Je hebt direct impact gemaakt: jouw actie zorgt ervoor dat jullie virtuele, gloednieuwe natuurgebied verbetert! Check de ranglijst om te zien hoe goed jullie het doen. Veel plezier! Vergeet niet om elke dag zelf nog quests uit te voeren en groen gedrag te blijven vertonen!',
+                'name' => 'Voldaan!',
+                'description' => 'Je hebt de eerste missie voltooid en de Stroomvreter is verslagen! Je hebt direct impact gemaakt. Jouw actie zorgt ervoor dat jullie virtuele, gloednieuwe natuurgebied verbetert.',
                 'media_url' => null,
                 'success_condition' => 'button',
             ],

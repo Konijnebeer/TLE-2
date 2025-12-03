@@ -1,9 +1,9 @@
 <x-app-layout>
-    <h1>
-        {{ $part->name }}
+    <h1 class="text-center">
+        {{ $quest->name }}
     </h1>
 
-    <x-infobox heading="Doel?">
+    <x-infobox heading="{{ $part->name }}">
         {{ $part->description }}
     </x-infobox>
 
