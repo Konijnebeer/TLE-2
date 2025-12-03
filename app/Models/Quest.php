@@ -42,6 +42,6 @@ class Quest extends Model
      */
     public function parts()
     {
-        return $this->hasMany(Parts::class);
+        return $this->hasMany(Part::class);
     }
 }

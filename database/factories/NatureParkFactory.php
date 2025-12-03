@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Group;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class NatureParkFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'group_id' => Group::factory(),
+            'state' => $this->faker->numberBetween(0, 10),
         ];
     }
 }

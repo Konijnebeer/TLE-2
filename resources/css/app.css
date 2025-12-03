@@ -1,3 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-white: #FFFFFF;
+    --color-light-gray: #EEEEEE;
+    --color-black: #111111;
+
+    --color-dark-blue: #36298B;
+    --color-pink: #E2006A;
+    --color-green: #007866;
+    --color-light-blue: #00B0E6;
+
+    --primary-color: var(--color-dark-blue);
+
+    --background-color: var(--color-light-gray);
+    --button-primary-color: var(--color-pink);
+    --button-secondary-color: var(--color-green);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", serif;
+    font-size: 20px;
+
+    background-color: var(--background-color);
+
+    margin: 0 0 75px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "DynaPuff", serif;
+
+    margin: 0;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    background-color: var(--color-white);
+
+    padding: 20px;
+}
+
+header img {
+    display: block;
+    border-radius: 10px;
+
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    height: 60px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: var(--color-white);
+
+    position: fixed;
+    width: 100%;
+    height: 75px;
+    bottom: 0;
+
+    padding: 10px;
+}
+
+nav i {
+    font-size: 40px;
+}
+
+.carousel-container {
+    max-height: calc(100vh - 175px);
+    overflow: hidden;
+}
+
+.carousel-container img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.popup {
+    position: fixed;
+    top: 25%;
+}
+
+.infobox-container {
+    padding: 50px;
+}
+
+.infobox-heading {
+    background-color: var(--color-pink);
+    border-radius: 0.25rem;
+    color: var(--color-white);
+
+    margin-left: -20px;
+
+    width: fit-content;
+    padding: 5px 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.infobox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--color-dark-blue);
+    border-radius: 0.25rem;
+    color: var(--color-white);
+
+    margin-top: -30px;
+    padding: 10px;
+    position: relative;
+}

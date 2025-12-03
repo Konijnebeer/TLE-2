@@ -13,7 +13,7 @@ class QuestController extends Controller
      */
     public function index()
     {
-        //
+        return view('quest.index');
     }
 
     /**
@@ -37,7 +37,7 @@ class QuestController extends Controller
      */
     public function show(Quest $quest)
     {
-        //
+        return view('quest.show', compact('quest'));
     }
 
     /**
