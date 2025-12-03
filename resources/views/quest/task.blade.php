@@ -1,11 +1,10 @@
 <x-app-layout>
     <h1>
-        Missie Stroomvreter
+        Wat moet je doen?
     </h1>
 
-    <x-infobox heading="Waarom?">
-        De stroomvreter bestrijden is essentieel! Het sluipverbruik in de klas zorgt voor onnodige CO2-uitstoot, wat klimaatverandering versnelt en de natuurgebieden van Natuurmonumenten beschadigt. Door één stekker uit het stopcontact te halen, bescherm jij de natuur direct, bespaar je de school geld én wordt een groene held voor je klasgenoten en thuis.
-    </x-infobox>
+    <x-infobox heading="DOEL?">
+        Kijk nu 60 seconden lang rond in je klas. Zoek naar alles wat stroom verspilt zonder nut: opladers in het stopcontact, monitors op stand-by (rood of oranje lampje), of luidsprekers die onnodig aanstaan.    </x-infobox>
 
     <div class="aspect-video bg-gray-300 rounded-lg shadow-md flex items-center justify-center p-4 mb-6">
         <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -18,3 +17,4 @@
     </x-button>
 
 </x-app-layout>
+
