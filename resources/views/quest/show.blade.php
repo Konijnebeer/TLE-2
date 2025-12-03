@@ -20,7 +20,7 @@
         </div>
 
         <div class="my-5 flex justify-center">
-            <a href="#">
+            <a href="{{ url('/quests/1/parts/1') }}">
                 <x-button>
                     Bekijk Quest
                 </x-button>
