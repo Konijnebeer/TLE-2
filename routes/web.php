@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestController;
+use App\Http\Controllers\PartController;
 use App\Http\Controllers\NatureParkController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,8 @@ Route::middleware('auth')->group(function () {
     // Homepage route.
     Route::get('/', [NatureParkController::class, 'slideshow'])->name('home');
     // Quests route.
-    Route::resource('/quests', questController::class);
+    Route::resource('/quests', QuestController::class);
+    Route::resource('/quests.parts',PartController::class);
 });
 
 require __DIR__ . '/auth.php';
