@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('code')->unique();
-            $table->dateTime('code_expires_at');
+            $table->string('code')->unique()->nullable();
+            $table->dateTime('code_expires_at')->nullable();
             $table->timestamps();
         });
     }

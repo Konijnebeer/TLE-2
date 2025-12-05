@@ -49,8 +49,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Attach users to group with proper group roles
-        $group->users()->attach($leraar->id, ['role' => GroupRole::OWNER->value]);
-        $group->users()->attach($leerling->id, ['role' => GroupRole::MEMBER->value]);
+        $group->users()->attach($leraar->id, ['role' => GroupRole::OWNER]);
+        $group->users()->attach($leerling->id, ['role' => GroupRole::MEMBER]);
 
         // Seed quests and parts
         $this->call([

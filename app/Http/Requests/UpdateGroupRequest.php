@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Group;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateGroupRequest extends FormRequest
@@ -11,7 +13,7 @@ class UpdateGroupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::authorize('update', Group::class)->allowed();
     }
 
     /**
@@ -22,7 +24,8 @@ class UpdateGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|between:3,100|unique:groups,name,' . $this->route('group')->id,
+            'description' => 'required|string|between:10,300',
         ];
     }
 }

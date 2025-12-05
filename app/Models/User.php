@@ -36,6 +36,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function isAdmin(): bool
+    {
+        return $this->role === Role::ADMIN;
+    }
+
+    public function isTeacher(): bool
+    {
+        return $this->role === Role::TEACHER;
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -57,6 +67,7 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany(Group::class)
+            ->using(GroupUser::class)
             ->withPivot('role')
             ->withTimestamps();
     }
