@@ -40,6 +40,7 @@ class Group extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)
+            ->using(GroupUser::class)
             ->withPivot('role')
             ->withTimestamps();
     }
@@ -47,8 +48,8 @@ class Group extends Model
     /**
      * Get the nature parks for the group.
      */
-    public function natureParks()
+    public function naturePark()
     {
-        return $this->hasMany(NaturePark::class);
+        return $this->hasOne(NaturePark::class);
     }
 }
