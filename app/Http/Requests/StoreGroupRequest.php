@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Group;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreGroupRequest extends FormRequest
@@ -11,7 +13,7 @@ class StoreGroupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::authorize('create', Group::class)->allowed();
     }
 
     /**
@@ -22,7 +24,8 @@ class StoreGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|between:3,100|unique:groups,name',
+            'description' => 'required|string|between:10,300',
         ];
     }
 }
