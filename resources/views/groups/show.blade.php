@@ -195,15 +195,15 @@
             </div>
         @else
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
-                <h2 class="mb-2">natuur Park</h2>
+                <h2 class="mb-2">Natuur Park</h2>
                 <p class="text-gray-600">Nog Geen Natuur Park</p>
             </div>
         @endif
 
-        <div class="flex gap-2">
+        <div class="flex gap-2 pb-4 mt-4 px-4">
             @can('update', $group)
-                <a href="{{ route('groups.edit', $group) }}">
-                    <x-button variant="secondary" size="small" :arrow="false">
+                <a href="{{ route('groups.edit', $group) }}" class="w-full">
+                    <x-button variant="primary" size="small" :arrow="false">
                         Bewerk Klas
                     </x-button>
                 </a>
@@ -211,10 +211,11 @@
 
             @can('delete', $group)
                 <form action="{{ route('groups.destroy', $group) }}" method="POST"
+                      class="inline w-full"
                       onsubmit="return confirm('Weet je zeker dat je de klas wilt verwijderen?');">
                     @csrf
                     @method('DELETE')
-                    <x-button variant="transparent" size="small" :arrow="false">
+                    <x-button variant="secondary" size="small" :arrow="false">
                         Verwijder Klas
                     </x-button>
                 </form>
