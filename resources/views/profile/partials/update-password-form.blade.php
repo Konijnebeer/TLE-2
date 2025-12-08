@@ -1,5 +1,5 @@
 <section>
-    <header>
+    <header class="flex flex-col gap-2">
         <h2 class="text-lg font-medium text-[--color-black]">
             {{ __('Veiligheid') }}
         </h2>

@@ -15,6 +15,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/groups/join', [ProfileController::class, 'joinGroup'])->name('profile.groups.join');
+    Route::delete('/profile/groups/{group}', [ProfileController::class, 'leaveGroup'])->name('profile.groups.leave');
 
     // Homepage route.
     Route::get('/', [NatureParkController::class, 'slideshow'])->name('home');

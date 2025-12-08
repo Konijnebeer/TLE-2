@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\GroupRole;
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -31,8 +33,28 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'code' => [
+                'nullable',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if ($value) {
+                        // Check if the code exists in the database
+                        $group = Group::where('code', $value)->first();
+
+                        if (!$group) {
+                            $fail('Deze klascode is ongeldig.');
+                            return;
+                        }
+
+                        // Check if the code has expired
+                        if ($group->isCodeExpired()) {
+                            $fail('Deze klascode is ongeldig.');
+                        }
+                    }
+                },
+            ]
         ]);
 
         $user = User::create([
@@ -40,6 +62,14 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        // If a valid code was provided, add the user to the group
+        if ($request->filled('code')) {
+            $group = Group::where('code', $request->code)->first();
+            if ($group && !$group->isCodeExpired()) {
+                $group->users()->attach($user->id, ['role' => GroupRole::GUEST]);
+            }
+        }
 
         event(new Registered($user));
 

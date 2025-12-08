@@ -22,7 +22,7 @@
 $classes = $baseClass . ' ' . $variantClass[$variant] . ' ' . $sizeClass[$size];
 @endphp
 
-<button class="{{ $classes }}">
+<button {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
     @if($arrow)
         <i class="fa-solid fa-arrow-right pl-2"></i>
