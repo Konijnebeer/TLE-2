@@ -113,6 +113,8 @@ nav i {
 .popup {
     position: fixed;
     top: 25%;
+
+    max-width: 425px;
 }
 
 .infobox-container {
