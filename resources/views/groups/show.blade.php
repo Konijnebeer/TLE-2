@@ -91,6 +91,7 @@
                                 :arrow="false"
                                 size="small"
                                 class="w-full"
+                                onclick="addUser({{ $group->id }})"
                             >
                                 Toevoegen
                             </x-button>
@@ -128,8 +129,15 @@
                                         </option>
                                     </select>
                                 @else
-                                    <span
-                                        class="inline-block px-2 py-1 bg-gray-100 rounded text-sm">Leraar</span>
+                                    <span class="inline-block px-2 py-1 bg-gray-100 rounded text-sm">
+                                        @if($user->pivot->role->value === 'owner')
+                                            Leraar
+                                        @elseif($user->pivot->role->value === 'member')
+                                            Leerling
+                                        @else
+                                            Gast
+                                        @endif
+                                    </span>
                                 @endif
                             </div>
 
