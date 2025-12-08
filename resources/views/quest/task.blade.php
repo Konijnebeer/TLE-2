@@ -1,4 +1,11 @@
 <x-app-layout>
+    @php
+        $partCondition = explode(':', $part->success_condition);
+    @endphp
+    @if ($partCondition[0] === 'timer')
+        @vite('resources/js/task.js')
+    @endif
+
     <h1 class="text-center">
         {{ $quest->name }}
     </h1>
@@ -35,11 +42,11 @@
     @endphp
 
     <div class="my-5 flex justify-center">
-        <a href="{{ url($btnURL) }}">
+        <a href="{{ url($btnURL) }}" @if(!empty($partCondition[1])) data-condition="{{$partCondition[1]}}" @endif >
             <x-button>
-                @if($part->success_condition === 'timer:60s')
-                    Volgende
-                @elseif($part->success_condition === 'textField')
+                @if($partCondition[0] === 'timer')
+                    Volgende ({{ $partCondition[1] }})
+                @elseif($partCondition[0] === 'textField')
                     Check
                 @else
                     KLAAR!
