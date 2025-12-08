@@ -1,9 +1,9 @@
 <x-app-layout>
     <section>
-        <h1>Groups</h1>
+        <h1 class="text-center">Klassen</h1>
 
         @if($groups->isEmpty())
-            <p>No groups found.</p>
+            <p>Geen klassen gevonden.</p>
         @else
             <div class="grid gap-4 mb-8">
                 @foreach ($groups as $group)
@@ -15,7 +15,7 @@
                         </p>
 
                         <div class="mb-4">
-                            <strong>Members:</strong> {{ $group->total_users_count }} total
+                            <strong>Members:</strong> {{ $group->total_users_count }} Totaal
                             <ul class="mt-2 ml-6 list-disc">
                                 <li>Leeraren: {{ $group->owners_count }}</li>
                                 <li>Leerlingen: {{ $group->members_count }}</li>
@@ -24,27 +24,20 @@
                         </div>
 
                         <div class="flex gap-2">
-                            <a href="{{ route('groups.show', $group) }}">
+                            <a href="{{ route('groups.show', $group) }}"
+                               class="w-full">
                                 <x-button variant="primary" size="small" :arrow="false">
                                     Bekijk
                                 </x-button>
                             </a>
 
-                            @can('update', $group)
-                                <a href="{{ route('groups.edit', $group) }}">
-                                    <x-button variant="secondary" size="small" :arrow="false">
-                                        Bewerken
-                                    </x-button>
-                                </a>
-                            @endcan
-
                             @can('delete', $group)
                                 <form action="{{ route('groups.destroy', $group) }}" method="POST"
-                                      class="inline"
+                                      class="inline w-full"
                                       onsubmit="return confirm('Weet je zeker dat je de klas wilt verwijderen?');">
                                     @csrf
                                     @method('DELETE')
-                                    <x-button variant="transparent" size="small" :arrow="false">
+                                    <x-button variant="secondary" size="small" :arrow="false">
                                         Verwijder
                                     </x-button>
                                 </form>

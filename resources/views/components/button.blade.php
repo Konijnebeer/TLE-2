@@ -5,7 +5,7 @@
 ])
 
 @php
-    $baseClass = 'rounded-sm';
+    $baseClass = 'rounded-sm w-full';
 
     $variantClass = [
         'primary' => 'bg-[--button-primary-color] text-[--color-white]',

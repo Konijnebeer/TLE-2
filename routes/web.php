@@ -36,6 +36,10 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::post('/groups/{group}/users', [GroupController::class, 'addUser'])
         ->name('groups.users.add')
         ->middleware('admin');
+    Route::post('/groups/{group}/code/generate', [GroupController::class, 'codeGenerate'])
+        ->name('groups.code.generate');
+    Route::delete('/groups/{group}/code', [GroupController::class, 'deleteCode'])
+        ->name('groups.code.delete');
     Route::resource('/nature', NatureParkController::class)
         ->only(['create', 'store', 'show', 'edit', 'update', 'destroy'])
         ->withoutMiddlewareFor('show', 'teacher');

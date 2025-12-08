@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\GroupRole;
 use App\Models\Group;
+use App\Models\NaturePark;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use Gate;
@@ -59,6 +60,11 @@ class GroupController extends Controller
         $group->code_expires_at = now()->addDays(7);
         $group->save();
 
+        // create nature park associated with the group
+        NaturePark::create([
+            'group_id' => $group->id,
+            'state' => 0
+        ]);
 
         // Add the creator as the owner of the group
         $group->users()->attach(auth()->user()->id, ['role' => GroupRole::OWNER]);
@@ -232,4 +238,28 @@ class GroupController extends Controller
             'message' => 'Gebruiker succesvol toegevoegd aan de groep'
         ]);
     }
+
+    public function codeGenerate(Group $group)
+    {
+        Gate::authorize('update', $group);
+
+        // If it has an unexpired code, expire it first
+        $group->expireCode();
+
+        $group->code = strtoupper(bin2hex(random_bytes(3)));
+        $group->code_expires_at = now()->addDays(7);
+        $group->save();
+        return redirect()->route('groups.show', ['group' => $group->id])
+            ->with('success', 'Class code generated successfully!');
+    }
+
+    public function deleteCode(Group $group)
+    {
+        Gate::authorize('update', $group);
+
+        $group->expireCode();
+        return redirect()->route('groups.show', ['group' => $group->id])
+            ->with('success', 'Class code deleted successfully!');
+    }
+
 }
