@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestController;
@@ -20,17 +21,23 @@ Route::middleware('auth')->group(function () {
 
     // Homepage route.
     Route::get('/', [NatureParkController::class, 'slideshow'])->name('home');
+
     // Quests route.
     Route::resource('/nature', NatureParkController::class)
         ->only('show');
-    Route::resource('/quests', QuestController::class);
-    Route::resource('/quests.parts', PartController::class);
+    Route::get('/nature/{naturePark}/quests', [NatureParkController::class, 'quests'])
+        ->name('nature.quests');
+    Route::resource('/groups.quests.parts', PartController::class)
+        ->only(['show']);
 });
 
 Route::middleware(['auth', 'teacher'])->group(function () {
+    // Group management routes for teachers and admins.
     Route::resource('/groups', GroupController::class)
         ->only(['create', 'store', 'show', 'edit', 'update', 'destroy'])
         ->withoutMiddlewareFor('show', 'teacher');
+
+    // Manage users within a group.
     Route::patch('/groups/{group}/users/{user}/role', [GroupController::class, 'updateUserRole'])
         ->name('groups.users.update-role');
     Route::delete('/groups/{group}/users/{user}', [GroupController::class, 'removeUser'])
@@ -38,13 +45,21 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::post('/groups/{group}/users', [GroupController::class, 'addUser'])
         ->name('groups.users.add')
         ->middleware('admin');
+
+    // Generate and delete group codes.
     Route::post('/groups/{group}/code/generate', [GroupController::class, 'codeGenerate'])
         ->name('groups.code.generate');
     Route::delete('/groups/{group}/code', [GroupController::class, 'deleteCode'])
         ->name('groups.code.delete');
+
+    // Nature park management routes for teachers and admins.
     Route::resource('/nature', NatureParkController::class)
         ->only(['create', 'store', 'show', 'edit', 'update', 'destroy'])
         ->withoutMiddlewareFor('show', 'teacher');
+
+    // quest management for teachers.
+    Route::resource('/groups.quests', QuestController::class)
+        ->only(['show']);
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
@@ -52,6 +67,16 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         ->only('index');
     Route::resource('/nature', NatureParkController::class)
         ->only('index');
+    Route::get('/', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');
+    Route::patch('/users/{user}/role', [AdminController::class, 'changeUserRole'])->name('admin.users.role');
+    Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+
+    // Quest management for admins.
+    Route::resource('/quests', QuestController::class)
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('/quests.parts', PartController::class)
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 });
 
 require __DIR__ . '/auth.php';

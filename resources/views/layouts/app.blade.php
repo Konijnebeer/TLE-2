@@ -40,7 +40,7 @@
 
 <footer>
     <nav>
-        <a href="{{ route('quests.index') }}">
+        <a href="{{ route('groups.') }}">
             <i class="fa-solid fa-scroll"></i>
         </a>
 

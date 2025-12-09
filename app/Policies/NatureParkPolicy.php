@@ -9,6 +9,17 @@ use Illuminate\Auth\Access\Response;
 class NatureParkPolicy
 {
     /**
+     * Perform pre-authorization checks.
+     */
+    public function before(User $user, string $ability): bool|null
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
+    }
+
+    /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
@@ -21,6 +32,13 @@ class NatureParkPolicy
      */
     public function view(User $user, NaturePark $naturePark): bool
     {
+        // Check if the user is part of the connected group
+        if ($user->group && $user->group->nature_park_id === $naturePark->id) {
+            // Check if the group role is not a guest
+            if ($user->group->role !== 'guest') {
+                return true;
+            }
+        }
         return false;
     }
 

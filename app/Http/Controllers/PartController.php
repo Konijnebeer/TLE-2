@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Part;
 use App\Http\Requests\StorePartRequest;
 use App\Http\Requests\UpdatePartRequest;
@@ -36,8 +37,10 @@ class PartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Quest $quest, Part $part)
+    public function show(Group $group, Quest $quest, Part $part)
     {
+        // Check if the user belongs to the group
+        // Check if the part belongs to the quest
         return view('quest.task', compact('quest', 'part'));
     }
 

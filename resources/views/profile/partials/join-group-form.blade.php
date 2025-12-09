@@ -119,5 +119,13 @@
                 <x-button size="small" :arrow="false">{{ __('Deelnemen aan klas') }}</x-button>
             </div>
         </form>
+        @can('create', App\Models\Group::class)
+            <a href="{{ route('groups.create') }}">
+                <x-button size="small" class="mt-2">
+                    Maak nieuwe klas aan
+                </x-button>
+            </a>
+        @endcan
     </div>
+
 </section>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NaturePark;
+use Gate;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreNatureParkRequest;
 use App\Http\Requests\UpdateNatureParkRequest;
@@ -18,7 +19,21 @@ class NatureParkController extends Controller
         foreach ($files as $file) {
             $images[] = $file->getFilename();
         }
-        return view('home')->with('images', $images);    }
+        return view('home')->with('images', $images);
+    }
+
+    /**
+     * See current pending quests for the group.
+     */
+    public function quests(naturePark $naturePark)
+    {
+        Gate::authorize('view', $naturePark);
+
+        // get the connected quest part via the nature park
+        $pendingQuests = $naturePark->parts()->where('is_active', true)->get();
+        @dd($pendingQuests);
+        return view('groups.pending-quests', compact('pendingQuests'));
+    }
 
     /**
      * Display a listing of the resource.
