@@ -40,9 +40,42 @@
 
 <footer>
     <nav>
-        <a href="{{ route('groups.') }}">
-            <i class="fa-solid fa-scroll"></i>
-        </a>
+        @auth
+            @php
+                // Admins can see all groups, regular users only see their groups
+                $userGroups = Auth::user()->isAdmin()
+                    ? \App\Models\Group::with('naturePark')->get()
+                    : Auth::user()->groups()->with('naturePark')->get();
+                $groupCount = $userGroups->count();
+            @endphp
+
+            @if($groupCount === 1 && !Auth::user()->isAdmin())
+                @php
+                    $naturePark = $userGroups->first()->naturePark;
+                @endphp
+                @if($naturePark)
+                    <a href="{{ route('nature.quests', ['naturePark' => $naturePark->id]) }}">
+                        <i class="fa-solid fa-scroll"></i>
+                    </a>
+                @else
+                    <a href="#" onclick="alert('Geen natuurpark gevonden voor jouw klas'); return false;">
+                        <i class="fa-solid fa-scroll"></i>
+                    </a>
+                @endif
+            @elseif($groupCount > 1 || Auth::user()->isAdmin())
+                <a href="#" x-data @click.prevent="$dispatch('open-modal', 'group-selection')">
+                    <i class="fa-solid fa-scroll"></i>
+                </a>
+            @else
+                <a href="#" onclick="alert('Je bent geen lid van een klas'); return false;">
+                    <i class="fa-solid fa-scroll"></i>
+                </a>
+            @endif
+        @else
+            <a href="{{ route('login') }}">
+                <i class="fa-solid fa-scroll"></i>
+            </a>
+        @endauth
 
         <a href="{{ route('home') }}">
             <i class="fa-solid fa-house"></i>
@@ -53,6 +86,46 @@
         </a>
     </nav>
 </footer>
+
+@auth
+    @if($userGroups->count() > 1 || Auth::user()->isAdmin())
+        <x-modal name="group-selection" maxWidth="lg">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-center mb-4">
+                    Selecteer een Klas
+                </h2>
+
+                <p class="text-center text-gray-600 mb-6">
+                    Kies van welke klas je de quests wilt bekijken.
+                </p>
+
+                <div class="space-y-3 max-h-96 overflow-y-auto">
+                    @foreach($userGroups as $group)
+                        @if($group->naturePark)
+                            <a href="{{ route('nature.quests', ['naturePark' => $group->naturePark->id]) }}"
+                               class="block w-full p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                                <h3 class="font-bold text-lg">{{ $group->name }}</h3>
+                                @if($group->description)
+                                    <p class="text-gray-600 mt-1">{{ $group->description }}</p>
+                                @endif
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+
+                <div class="mt-6">
+                    <x-button
+                        type="button"
+                        :arrow="false"
+                        x-on:click="$dispatch('close-modal', 'group-selection')"
+                    >
+                        Annuleren
+                    </x-button>
+                </div>
+            </div>
+        </x-modal>
+    @endif
+@endauth
 
 </body>
 

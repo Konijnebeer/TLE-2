@@ -21,18 +21,18 @@ Route::middleware('auth')->group(function () {
 
     // Homepage route.
     Route::get('/', [NatureParkController::class, 'slideshow'])->name('home');
-
-    // Quests route.
-
 });
 
 Route::middleware(['auth', 'isActive'])->group(function () {
+    // Quests route.
     Route::resource('/nature', NatureParkController::class)
         ->only('show');
     Route::get('/nature/{naturePark}/quests', [NatureParkController::class, 'quests'])
         ->name('nature.quests');
-    Route::resource('/groups.quests.parts', PartController::class)
-        ->only(['show']);
+    Route::get('/nature/{naturePark}/quests/{quest}', [NatureParkController::class, 'questShow'])
+        ->name('nature.quests.show');
+    Route::get('/nature/{naturePark}/quests/{quest}/parts/{part}', [NatureParkController::class, 'questPart'])
+        ->name('nature.quests.parts');
 });
 
 Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
@@ -62,8 +62,7 @@ Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
         ->withoutMiddlewareFor('show', 'teacher');
 
     // quest management for teachers.
-    Route::resource('/groups.quests', QuestController::class)
-        ->only(['show']);
+    Route::get('/groups.quests', [GroupController::class, 'quests'])->name('groups.quests');
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {

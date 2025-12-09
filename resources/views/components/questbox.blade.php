@@ -1,20 +1,27 @@
 @props([
     'title' => 'Default title',
     'progress' => '?/?',
-    'link' => 1
+    'questLink' => '#',
+    'partLink' => '#'
 ])
 
-<a href="{{ route('quests.show', $link) }}" id="button">
-    <div
-        class="flex border-2 border-solid shadow-lg border-black rounded-2 flex-row bg-white m-4 p-4 justify-between">
+<div
+    class=" border-2 border-solid shadow-lg border-black rounded-2 flex-row bg-white m-4 p-4 justify-between cursor-pointer hover:shadow-xl transition-shadow"
+    onclick="window.location='{{ $questLink }}'">
 
-        <div class="items-start">
-            <h2>{{ $title }}</h2>
-            <p>{{ $slot }}</p>
-        </div>
-        <div class="flex  items-center ">
-            <p>{{ $progress }}</p>
-        </div>
-
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-3xl">{{ $title }}</h2>
+        <p class="text-md font-semibold">{{ $progress }}</p>
+        {{--        <p class="">{{ $slot }}</p>--}}
     </div>
-</a>
+
+
+    <x-button
+        onclick="event.stopPropagation(); window.location='{{ $partLink }}'"
+
+    >
+        Ga naar quest
+    </x-button>
+
+
+</div>

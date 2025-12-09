@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\GroupRole;
 use App\Enums\Role;
 use App\Models\Group;
+use App\Models\Part;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -56,5 +57,16 @@ class DatabaseSeeder extends Seeder
         // Attach users to group with proper group roles
         $group->users()->attach($leraar->id, ['role' => GroupRole::OWNER]);
         $group->users()->attach($leerling->id, ['role' => GroupRole::MEMBER]);
+
+        // Get the nature park created by the group factory and assign the first quest part
+        $naturePark = $group->naturePark;
+
+        // Get the first part from the first quest
+        $firstPart = Part::orderBy('quest_id')->orderBy('order_index')->first();
+
+        if ($firstPart && $naturePark) {
+            $naturePark->parts()->attach($firstPart->id, ['status' => 'pending']);
+        }
+
     }
 }

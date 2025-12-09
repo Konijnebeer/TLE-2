@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\GroupRole;
 use App\Models\NaturePark;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -32,14 +33,12 @@ class NatureParkPolicy
      */
     public function view(User $user, NaturePark $naturePark): bool
     {
-        // Check if the user is part of the connected group
-        if ($user->group && $user->group->nature_park_id === $naturePark->id) {
-            // Check if the group role is not a guest
-            if ($user->group->role !== 'guest') {
-                return true;
-            }
-        }
-        return false;
+        // Check if the user is part of the group that owns this nature park
+        // and that their role in the group is not 'guest'
+        return $user->groups()
+            ->where('groups.id', $naturePark->group_id)
+            ->wherePivot('role', '!=', GroupRole::GUEST)
+            ->exists();
     }
 
     /**
