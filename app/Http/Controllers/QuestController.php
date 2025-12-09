@@ -37,7 +37,9 @@ class QuestController extends Controller
      */
     public function show(Quest $quest)
     {
-        return view('quest.show', compact('quest'));
+        $firstPart = $quest->parts()->orderBy('order_index')->first();
+
+        return view('quest.show', compact('quest', 'firstPart'));
     }
 
     /**
