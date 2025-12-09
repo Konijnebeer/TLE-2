@@ -57,7 +57,7 @@
                                     {{ __('Rol') }}:
                                     @switch($group->pivot->role->value)
                                         @case('owner')
-                                            <span class="font-medium">{{ __('Leeraar') }}</span>
+                                            <span class="font-medium">{{ __('Leraar') }}</span>
                                             @break
                                         @case('member')
                                             <span class="font-medium">{{ __('Leerling') }}</span>
@@ -67,7 +67,7 @@
                                             @break
                                     @endswitch
                                 </p>
-                            
+
                             </div>
 
                             @if ($group->pivot->role->value !== 'owner')
