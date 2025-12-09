@@ -46,48 +46,51 @@
         @else
             <div class="space-y-3">
                 @foreach ($groups as $group)
-                    <div class="flex flex-col p-4 border border-gray-200 rounded-lg space-y-3">
-                        <div>
-                            <h4 class="font-medium text-[--color-black]">{{ $group->name }}</h4>
-                            @if ($group->description)
-                                <p class="text-sm text-gray-600">{{ $group->description }}</p>
-                            @endif
-                            <p class="text-xs text-gray-500 mt-1">
-                                {{ __('Rol') }}:
-                                @switch($group->pivot->role->value)
-                                    @case('owner')
-                                        <span class="font-medium">{{ __('Leeraar') }}</span>
-                                        @break
-                                    @case('member')
-                                        <span class="font-medium">{{ __('Leerling') }}</span>
-                                        @break
-                                    @case('guest')
-                                        <span class="font-medium">{{ __('Gast') }}</span>
-                                        @break
-                                @endswitch
-                            </p>
-                        </div>
+                    <a href="{{ route('groups.show', $group) }}" class="block">
+                        <div class="flex flex-col p-4 border border-gray-200 rounded-lg space-y-3">
+                            <div>
+                                <h4 class="font-medium text-[--color-black]">{{ $group->name }}</h4>
+                                @if ($group->description)
+                                    <p class="text-sm text-gray-600">{{ $group->description }}</p>
+                                @endif
+                                <p class="text-xs text-gray-500 mt-1">
+                                    {{ __('Rol') }}:
+                                    @switch($group->pivot->role->value)
+                                        @case('owner')
+                                            <span class="font-medium">{{ __('Leraar') }}</span>
+                                            @break
+                                        @case('member')
+                                            <span class="font-medium">{{ __('Leerling') }}</span>
+                                            @break
+                                        @case('guest')
+                                            <span class="font-medium">{{ __('Gast') }}</span>
+                                            @break
+                                    @endswitch
+                                </p>
 
-                        @if ($group->pivot->role->value !== 'owner')
-                            <form method="post" action="{{ route('profile.groups.leave', $group) }}" class="w-full">
-                                @csrf
-                                @method('delete')
-                                <x-button
-                                    type="submit"
-                                    variant="secondary"
-                                    size="small"
-                                    :arrow="false"
-                                    onclick="return confirm('Weet je zeker dat je deze klas wilt verlaten?')"
-                                    class="w-full"
-                                >
-                                    {{ __('Verlaten') }}
-                                </x-button>
-                            </form>
-                        @else
-                            <span
-                                class="text-xs text-gray-500 text-center">{{ __('(Kan niet verlaten als eigenaar)') }}</span>
-                        @endif
-                    </div>
+                            </div>
+
+                            @if ($group->pivot->role->value !== 'owner')
+                                <form method="post" action="{{ route('profile.groups.leave', $group) }}" class="w-full">
+                                    @csrf
+                                    @method('delete')
+                                    <x-button
+                                        type="submit"
+                                        variant="secondary"
+                                        size="small"
+                                        :arrow="false"
+                                        onclick="return confirm('Weet je zeker dat je deze klas wilt verlaten?')"
+                                        class="w-full"
+                                    >
+                                        {{ __('Verlaten') }}
+                                    </x-button>
+                                </form>
+                            @else
+                                <span
+                                    class="text-xs text-gray-500 text-center">{{ __('(Kan niet verlaten als eigenaar)') }}</span>
+                            @endif
+                        </div>
+                    </a>
                 @endforeach
             </div>
         @endif
@@ -119,5 +122,13 @@
                 <x-button size="small" :arrow="false">{{ __('Deelnemen aan klas') }}</x-button>
             </div>
         </form>
+        @can('create', App\Models\Group::class)
+            <a href="{{ route('groups.create') }}">
+                <x-button size="small" class="mt-2">
+                    Maak nieuwe klas aan
+                </x-button>
+            </a>
+        @endcan
     </div>
+
 </section>

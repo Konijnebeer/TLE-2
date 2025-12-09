@@ -9,11 +9,22 @@ use Illuminate\Auth\Access\Response;
 class PartPolicy
 {
     /**
+     * Perform pre-authorization checks.
+     */
+    public function before(User $user, string $ability): bool|null
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
+    }
+
+    /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->isTeacher();
     }
 
     /**
@@ -21,7 +32,7 @@ class PartPolicy
      */
     public function view(User $user, Part $parts): bool
     {
-        return false;
+        return $user->isTeacher();
     }
 
     /**
