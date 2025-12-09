@@ -48,6 +48,9 @@ Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
     Route::resource('/nature', NatureParkController::class)
         ->only(['create', 'store', 'show', 'edit', 'update', 'destroy'])
         ->withoutMiddlewareFor('show', 'teacher');
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
