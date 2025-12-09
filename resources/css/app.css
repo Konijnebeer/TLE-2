@@ -151,3 +151,8 @@ nav i {
     padding: 10px;
     position: relative;
 }
+
+.social_links{
+    display: flex;
+    gap: 10px;
+}
