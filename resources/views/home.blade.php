@@ -16,7 +16,7 @@
             <div class="carousel-inner">
                 @foreach ($images as $index => $image)
                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                        <img src="{{ asset('carousel/' . $image) }}" class="d-block w-100" alt="Foto {{ $index+1 }}">
+                        <img src="{{ asset('natuurgebied-progression/' . $image) }}" class="d-block w-100" alt="Foto {{ $index+1 }}">
                     </div>
                 @endforeach
             </div>
