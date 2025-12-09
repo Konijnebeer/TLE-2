@@ -32,16 +32,16 @@ class QuestSeeder extends Seeder
             [
                 'order_index' => 2,
                 'name' => 'Check!',
-                'description' => 'Type hieronder wat je allemaal hebt gevonden in je klaslokaal en hebt uitgezet! Wanneer je alles hebt ingevuld, klik dan op volgende.',
+                'description' => 'Type hieronder wat je allemaal hebt gevonden in je klaslokaal en hebt uitgezet! Wanneer je alles hebt ingevuld, klik dan op Check.',
                 'media_url' => null,
-                'success_condition' => 'textField',
+                'success_condition' => 'input',
             ],
             [
                 'order_index' => 3,
                 'name' => 'Voldaan!',
                 'description' => 'Je hebt de eerste missie voltooid en de Stroomvreter is verslagen! Je hebt direct impact gemaakt. Jouw actie zorgt ervoor dat jullie virtuele, gloednieuwe natuurgebied verbetert.',
                 'media_url' => null,
-                'success_condition' => 'button',
+                'success_condition' => 'done',
             ],
         ]);
     }

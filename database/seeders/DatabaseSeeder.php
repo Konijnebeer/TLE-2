@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Seed quests and parts
+        $this->call([
+            QuestSeeder::class,
+        ]);
+
         // Create admin user with global admin role
         User::factory()->create([
             'name' => 'admin',
@@ -51,11 +56,5 @@ class DatabaseSeeder extends Seeder
         // Attach users to group with proper group roles
         $group->users()->attach($leraar->id, ['role' => GroupRole::OWNER]);
         $group->users()->attach($leerling->id, ['role' => GroupRole::MEMBER]);
-
-        // Seed quests and parts
-        $this->call([
-            QuestSeeder::class,
-            NatureParkSeeder::class,
-        ]);
     }
 }

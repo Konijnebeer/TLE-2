@@ -3,7 +3,9 @@
         $partCondition = explode(':', $part->success_condition);
     @endphp
     @if ($partCondition[0] === 'timer')
-        @vite('resources/js/task.js')
+        @vite('resources/js/task_timer.js')
+    @elseif($partCondition[0] === 'input')
+        @vite('resources/js/task_input.js')
     @endif
 
     <h1 class="text-center">
@@ -14,8 +16,8 @@
         {{ $part->description }}
     </x-infobox>
 
-    @if($part->success_condition === 'textField')
-        <textarea class="w-full h-48 p-4 border border-gray-300 rounded-lg shadow-md"
+    @if($part->success_condition === 'input')
+        <textarea id="input" class="w-full h-48 p-4 border border-gray-300 rounded-lg shadow-md"
                   placeholder="Voer je antwoord hier in..."></textarea>
     @elseif($part->success_condition === 'timer:60s')
         <div class="aspect-video bg-gray-300 rounded-lg shadow-md flex items-center justify-center p-4 mb-6">
@@ -33,7 +35,7 @@
 
         $nextPart = $urlPart += 1;
 
-        if($part->success_condition !== 'button') {
+        if($part->success_condition !== 'done') {
             $btnURL = '/quests/1/parts/' . $nextPart;
         } else {
             $btnURL = route('home');
@@ -46,7 +48,7 @@
             <x-button>
                 @if($partCondition[0] === 'timer')
                     Volgende ({{ $partCondition[1] }})
-                @elseif($partCondition[0] === 'textField')
+                @elseif($partCondition[0] === 'input')
                     Check
                 @else
                     KLAAR!

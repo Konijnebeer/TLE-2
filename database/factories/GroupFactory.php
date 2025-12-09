@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\NaturePark;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,5 +23,14 @@ class GroupFactory extends Factory
             'code' => strtoupper(fake()->bothify('???###')),
             'code_expires_at' => now()->addDays(21),
         ];
+    }
+
+    /**
+     * Configure the model factory.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(fn($group) => NaturePark::factory()->create(['group_id' => $group->id, 'state' => 0])
+        );
     }
 }

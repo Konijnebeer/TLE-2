@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [NatureParkController::class, 'slideshow'])->name('home');
 
     // Quests route.
+
+});
+
+Route::middleware(['auth', 'isActive'])->group(function () {
     Route::resource('/nature', NatureParkController::class)
         ->only('show');
     Route::get('/nature/{naturePark}/quests', [NatureParkController::class, 'quests'])
@@ -31,7 +35,7 @@ Route::middleware('auth')->group(function () {
         ->only(['show']);
 });
 
-Route::middleware(['auth', 'teacher'])->group(function () {
+Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
     // Group management routes for teachers and admins.
     Route::resource('/groups', GroupController::class)
         ->only(['create', 'store', 'show', 'edit', 'update', 'destroy'])
