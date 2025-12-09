@@ -16,10 +16,10 @@
                 {{--                {{ $questData['quest']->description }}--}}
             </x-questbox>
         @empty
-            <p class="text-center text-black">Geen actieve quests op dit moment.</p>
+            <p class="text-center text-white">Geen actieve quests op dit moment.</p>
         @endforelse
 
-        <p class="text-center text-black">Kom snel terug voor meer quests!</p>
+        <p class="text-center text-white">Kom snel terug voor meer quests!</p>
 
     </section>
 

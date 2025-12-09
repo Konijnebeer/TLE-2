@@ -1,6 +1,10 @@
 <x-app-layout>
     @php
         $partCondition = explode(':', $part->success_condition);
+
+        if($partCondition[0] === 'multiple') {
+            $multipleOptions = explode(',', $partCondition[1]);
+        }
     @endphp
     @if ($partCondition[0] === 'timer')
         @vite('resources/js/task_timer.js')
@@ -16,45 +20,47 @@
         {{ $part->description }}
     </x-infobox>
 
-    @if($part->success_condition === 'input')
+    @if($partCondition[0] === 'input')
         <textarea id="input" class="w-full h-48 p-4 border border-gray-300 rounded-lg shadow-md"
                   placeholder="Voer je antwoord hier in..."></textarea>
-    @elseif($part->success_condition === 'timer:60s')
-        <div class="aspect-video bg-gray-300 rounded-lg shadow-md flex items-center justify-center p-4 mb-6">
-            <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                      clip-rule="evenodd"></path>
-            </svg>
-        </div>
     @endif
 
     @php
         $urlPart = (int) request()->segment(count(request()->segments()));
+        $questID = $quest->id;
 
         $nextPart = $urlPart += 1;
 
         if($part->success_condition !== 'done') {
-            $btnURL = '/quests/1/parts/' . $nextPart;
+            $btnURL = "/quests/{$questID}/parts/" . $nextPart;
         } else {
             $btnURL = route('home');
             auth()->user()->update(['onboarding_completed' => true]);
         }
     @endphp
 
-    <div class="my-5 flex justify-center">
-        <a href="{{ url($btnURL) }}" @if(!empty($partCondition[1])) data-condition="{{$partCondition[1]}}" @endif >
-            <x-button>
-                @if($partCondition[0] === 'timer')
-                    Volgende ({{ $partCondition[1] }})
-                @elseif($partCondition[0] === 'input')
-                    Check
-                @else
-                    KLAAR!
-                @endif
+    @if($partCondition[0] === 'multiple')
+        @foreach($multipleOptions as $key=>$option)
+            <x-button variant="secondary" size="small" :arrow="false">
+                {{ $option }}
             </x-button>
-        </a>
+        @endforeach
+    @endif
+
+    <div class="my-5 flex justify-center">
+        @if($partCondition[0] !== 'multiple')
+            <a href="{{ url($btnURL) }}" @if(!empty($partCondition[1])) data-condition="{{$partCondition[1]}}" @endif >
+                <x-button>
+                    @if($partCondition[0] === 'timer')
+                        Volgende ({{ $partCondition[1] }})
+                    @elseif($partCondition[0] === 'input')
+                        Check
+                    @else
+                        KLAAR!
+                    @endif
+                </x-button>
+            </a>
+        @endif
     </div>
 
 </x-app-layout>
