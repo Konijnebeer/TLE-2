@@ -15,7 +15,7 @@
         <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased bg-[url('/public/images/bird.jpg')] bg-no-repeat bg-cover  overflow-hidden " >
+    <body class="font-sans text-gray-900 antialiased bg-[url('/public/images/bird.jpg')] bg-no-repeat bg-cover md:bg-[0px] bg-[-325px] overflow-hidden " >
         <div class="min-h-screen flex flex-col sm:justify-center items-center justify-center sm:pt-0  pb-36 ">
             <div>
                 <a href="/">

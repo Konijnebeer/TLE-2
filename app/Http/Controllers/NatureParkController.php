@@ -14,8 +14,8 @@ class NatureParkController extends Controller
 {
     public function slideshow()
     {
-        // gebruik de map carousel als variabel $files om de images in te laden
-        $files = File::files(public_path('carousel'));
+        // gebruik de map natuurgebied-progression als variabel $files om de images in te laden
+        $files = File::files(public_path('natuurgebied-progression'));
         $images = [];
         // for loop om alle fotos op te halen uit de map carousel
         foreach ($files as $file) {

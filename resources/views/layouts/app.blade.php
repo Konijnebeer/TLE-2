@@ -21,7 +21,7 @@
 <body>
 
 <header>
-    <a href="{{ route('home') }}">
+    <a href="{{ route('about') }}">
         <img src="{{ url('/images/logo.png') }}" alt="">
     </a>
     @guest

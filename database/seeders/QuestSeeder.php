@@ -44,5 +44,27 @@ class QuestSeeder extends Seeder
                 'success_condition' => 'done',
             ],
         ]);
+        Quest::create([
+            'name' => 'Natuur Trivia',
+            'description' => 'Natuur Trivia test je inzicht in habitats. Door een plek te zien, weet je direct welk dier daar thuishoort en waarom de plek belangrijk is.',
+            'difficulty_level' => 2,
+            'category' => QuestCategory::NATURE,
+            'is_active' => true,
+        ])->parts()->createMany([
+            [
+                'order_index' => 1,
+                'name' => 'Doel',
+                'description' => 'Je staat in een open, zanderig gebied aan de kust. Er staan weinig bomen, maar vooral lage struikjes en droge grassoorten. Het is er vaak winderig en er zijn veel zandduinen. Welk dier is hier de baas?',
+                'media_url' => null,
+                'success_condition' => 'multiple:Bever (Bouwt dammen),Konijn (Graaft tunnels),Wild Zwijn (Woelt in bossen),Fuut (Watervogel):1'
+            ],
+            [
+                'order_index' => 2,
+                'name' => 'Voldaan!',
+                'description' => 'Konijn is het juiste antwoord! Ze zijn perfect in het graven van burchten in de zanderige duingrond. Ze eten de lage planten die daar groeien en houden zo de duinen open. Hierdoor is het Konijn superbelangrijk voor de balans van het duinlandschap!',
+                'media_url' => null,
+                'success_condition' => 'done',
+            ],
+        ]);
     }
 }

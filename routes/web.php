@@ -63,6 +63,11 @@ Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
 
     // quest management for teachers.
     Route::get('/groups.quests', [GroupController::class, 'quests'])->name('groups.quests');
+
+    //about
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
