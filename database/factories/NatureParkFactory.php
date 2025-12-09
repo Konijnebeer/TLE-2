@@ -18,8 +18,7 @@ class NatureParkFactory extends Factory
     public function definition(): array
     {
         return [
-            'group_id' => Group::factory(),
-            'state' => $this->faker->numberBetween(0, 10),
+            'state' => fake()->numberBetween(0, 10),
         ];
     }
 }

@@ -188,16 +188,12 @@
                 </div>
             </div>
         @endcan
-
         @if($group->naturePark)
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
-                <h2 class="mb-2">Nature Park</h2>
-                <p class="mb-2 text-gray-600">
-                    <strong>State:</strong> {{ $group->naturePark->state }}
-                </p>
+                <h2 class="mb-2">Natuur gebied</h2>
                 <a href="{{ route('nature.show', $group->naturePark) }}">
-                    <x-button variant="primary" size="small" :arrow="false">
-                        Ga Naar Natuur Park
+                    <x-button variant="primary" size="small">
+                        Ga Naar Natuur Gebied
                     </x-button>
                 </a>
             </div>
