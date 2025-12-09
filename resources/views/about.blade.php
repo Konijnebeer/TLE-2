@@ -5,7 +5,7 @@
     >
         <x-infobox heading="Over ons">
             Wij werken in samenwerking met de natuurmonumenten om hun doelen te steunen.
-            <a href="https://www.natuurmonumenten.nl/" class="mt-2">
+            <a href="https://www.natuurmonumenten.nl/" target="_blank" class="mt-2">
                 <x-button size="small" :arrow="false" variant="secondary">
                     Natuurmonumenten
                 </x-button>
