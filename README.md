@@ -1,20 +1,19 @@
 # TLE-2
 
-Dit school project is voor de opdracht gever [Natuurmonumenten](https://www.natuurmonumenten.nl/)
+This is a schoolproject for the client [Natuurmonumenten](https://www.natuurmonumenten.nl/)
 via [iO](https://www.iodigital.com/nl)
 
 ## Setup
 
-1. Clone de repository.
-2. Open je terminal en run `composer run setup`.
-3. Zorg dat *Laravel Herd* je project ziet en secure is.
+1. Clone the repository.
+2. Open your terminal and run `composer run setup`. 
+3. Ensure that *Laravel Herd* sees your project and is secure.
 4. Run `npm run dev`.
-5. Ga naar `tle-2.test`.
+5. Go to `tle-2.test`.
 
 ## Concept
 
-De applicatie is gemaakt om een jongere doelgroep te actieveren en informeren met huidige themas die spellen rond
-klimaat en natuur.
+The app was created to engage and inform a younger audience about current themes related to climate and nature.
 
 ## ERD & Wireframes
 
@@ -23,24 +22,24 @@ klimaat en natuur.
 
 ## Code Rules & Conventions
 
-[Hoe werk je met GitHub in PhpStorm](https://www.jetbrains.com/help/phpstorm/work-with-github-pull-requests.html)
+[How to work with GitHub in PhpStorm](https://www.jetbrains.com/help/phpstorm/work-with-github-pull-requests.html)
 
 [laravel Best Practises & Conventions](https://github.com/alexeymezenin/laravel-best-practices)
 
 ### Rules
 
-- Schrijf duidelijke commit messages.
-- Maak gebruik van feature branches.
-    - Zorg er voor dat je `feature/story-#` gebruikt als naamgeving.
-- Maak gebruik van Pull Requests.
-    - Je kan een **issue** koppelen met `Closes: #issue-number` in de PR description.
-- Als je een Model maakt doe je dat met de `php artisan make:model Model --all`
-    - Hierdoor krijg je automatisch een migration, factory, seeder en controller erbij.
-- Review elkaars code bij Pull Requests.
-- Houd de codebase schoon en verwijder ongebruikte code.
-- Documenteer belangrijke delen van de codebase.
-- Wanneer je de Database Schema wil veranderen doe je dit **altijd** via een nieuwe migration.
-- [Enums zijn php Enums hierdoor (gebruiken we geen strings tijdens checks maar de Enum).](https://medium.com/@zulfikarditya/using-php-enums-in-laravel-12-a-comprehensive-guide-af75689f88e8)
+- Write clear commit messages.
+- Use feature branches.
+    - Make sure to use `feature/story-#` as naming conventions.
+- Use Pull Requests.
+    - You can link an **issue** with `Closes: #issue-number` in the PR description.
+- When you create a Model you do this with the `php artisan make:model Model --all`
+    - This will automatically give you a migration, factory, seeder and controller.
+- Review each other's code on Pull Requests.
+- Keep the codebase clean and remove unused code.
+- Document important parts of the codebase.
+- Whenever you want to change the Database Schema you **always** do this via a new migration.
+- [Enums are php Enums because of this (we don't use strings during checks but the Enum).](https://medium.com/@zulfikarditya/using-php-enums-in-laravel-12-a-comprehensive-guide-af75689f88e8)
 
 ## Code snippets & Commands
 
@@ -55,8 +54,8 @@ npm run dev
 npm run build
 ```
 
-Als je reviewd kan je binnen een Pull Request comments toevoegen
-en kan je direct aanpassingens suggesties geven met de volgende snippets:
+When reviewing, you can add comments within a Pull Request
+and directly suggest changes with the following snippets:
 
 \`\`\`suggestion
 
