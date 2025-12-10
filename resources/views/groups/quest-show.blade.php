@@ -17,7 +17,7 @@
         </div>
 
         <div class="my-5 flex justify-center">
-            <a href="{{ route('quests.parts.show', [$quest, $firstPart] ) }}">
+            <a href="{{ route('nature.quests.parts', ['naturePark' => $naturePark->id, 'quest' => $quest->id, 'part' => $part->id]) }}">
                 <x-button>
                     Bekijk Quest
                 </x-button>

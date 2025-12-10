@@ -52,4 +52,23 @@ class Group extends Model
     {
         return $this->hasOne(NaturePark::class);
     }
+
+    /**
+     * Check if the class code has expired.
+     */
+    public function isCodeExpired(): bool
+    {
+        return $this->code_expires_at !== null && $this->code_expires_at->isPast();
+    }
+
+    /**
+     * Expire the class code (set code and expires_at to null).
+     */
+    public function expireCode(): void
+    {
+        $this->update([
+            'code' => null,
+            'code_expires_at' => null
+        ]);
+    }
 }

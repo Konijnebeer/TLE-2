@@ -16,7 +16,8 @@
             <div class="carousel-inner">
                 @foreach ($images as $index => $image)
                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                        <img src="{{ asset('carousel/' . $image) }}" class="d-block w-100" alt="Foto {{ $index+1 }}">
+                        <img src="{{ asset('natuurgebied-progression/' . $image) }}" class="d-block w-100"
+                             alt="Foto {{ $index+1 }}">
                     </div>
                 @endforeach
             </div>
@@ -29,18 +30,36 @@
             </button>
         </div>
 
-        @if(auth()->user()->onboarding_completed === false)
+        @if(auth()->user()->onboarding_completed === false && !auth()->user()->isAdmin() && auth()->user()->isActive())
             <div class="popup">
                 <x-infobox heading="Welkom!">
                     Hey avonturier! Ben jij klaar voor
                     een nieuw avontuur? Ja? Mooi! Klik
                     op de knop hieronder om gelijk te
                     beginnen!
-                    <a href="{{ route('quests.index') }}" style="z-index: 10;">
-                        <x-button>
-                            Begin
-                        </x-button>
-                    </a>
+                    @php
+                        $firstUserGroup = Auth::user()->groups()->with('naturePark')->first();
+                        $firstNaturePark = $firstUserGroup?->naturePark;
+                        // Check if user is a guest in this group
+                        $isGuest = $firstUserGroup && $firstUserGroup->pivot->role === \App\Enums\GroupRole::GUEST;
+                    @endphp
+                    @if($firstNaturePark && !$isGuest)
+                        <a href="{{ route('nature.quests', ['naturePark' => $firstNaturePark->id]) }}"
+                           style="z-index: 10;">
+                            <x-button>
+                                Begin
+                            </x-button>
+                        </a>
+                    @elseif($isGuest)
+                        <p class="text-red-500 mt-2">Als gast heb je geen toegang tot quests. Neem contact op met je
+                            leraar.</p>
+                    @else
+                        <a href="{{ route('profile.edit') }}" style="z-index: 10;">
+                            <x-button>
+                                Voeg een klas toe
+                            </x-button>
+                        </a>
+                    @endif
                 </x-infobox>
             </div>
         @endif

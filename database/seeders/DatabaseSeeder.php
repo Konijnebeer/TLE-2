@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\GroupRole;
 use App\Enums\Role;
 use App\Models\Group;
+use App\Models\Part;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Seed quests and parts
+        $this->call([
+            QuestSeeder::class,
+        ]);
+
         // Create admin user with global admin role
         User::factory()->create([
             'name' => 'admin',
@@ -28,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
         // Create a group
         $group = Group::factory()->create([
-            'name' => 'Schoolgroep NaN',
+            'name' => 'De Regenboog',
             'description' => 'Een schoolgroep die de natuurparken bezoekt.',
         ]);
 
@@ -52,10 +58,18 @@ class DatabaseSeeder extends Seeder
         $group->users()->attach($leraar->id, ['role' => GroupRole::OWNER]);
         $group->users()->attach($leerling->id, ['role' => GroupRole::MEMBER]);
 
-        // Seed quests and parts
-        $this->call([
-            QuestSeeder::class,
-            NatureParkSeeder::class,
-        ]);
+        // Get the nature park created by the group factory and assign the first quest part
+        $naturePark = $group->naturePark;
+
+        // Get the first part from the first quest
+        $firstPartFirstQuest = Part::where('quest_id', 1)->orderBy('order_index')->first();
+        $firstPartSecondQuest = Part::where('quest_id', 2)->orderBy('order_index')->first();
+        $firstPartThirdQuest = Part::where('quest_id', 3)->orderBy('order_index')->first();
+
+        if ($firstPartFirstQuest && $firstPartSecondQuest && $naturePark) {
+            $naturePark->parts()->attach($firstPartFirstQuest->id, ['status' => 'pending']);
+            $naturePark->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
+            $naturePark->parts()->attach($firstPartThirdQuest->id, ['status' => 'pending']);
+        }
     }
 }

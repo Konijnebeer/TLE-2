@@ -25,31 +25,34 @@
                   placeholder="Voer je antwoord hier in..."></textarea>
     @endif
 
-    @php
-        $urlPart = (int) request()->segment(count(request()->segments()));
-        $questID = $quest->id;
-
-        $nextPart = $urlPart += 1;
-
-        if($part->success_condition !== 'done') {
-            $btnURL = "/quests/{$questID}/parts/" . $nextPart;
-        } else {
-            $btnURL = route('home');
-            auth()->user()->update(['onboarding_completed' => true]);
-        }
-    @endphp
-
     @if($partCondition[0] === 'multiple')
-        @foreach($multipleOptions as $key=>$option)
-            <x-button variant="secondary" size="small" :arrow="false">
-                {{ $option }}
-            </x-button>
-        @endforeach
+        <script>
+            function checkAnswer(submittedAns) {
+                const correctAnswer = {{ $partCondition[2] }};
+                const nextRoute = "{{ route('nature.quests.parts.next', [$naturePark, $quest, $part]) }}";
+
+                if (submittedAns == correctAnswer) {
+                    window.location = nextRoute;
+                } else {
+                    alert('Dat antwoord is helaas fout! Probeer het opnieuw.');
+                }
+            }
+        </script>
+        <h3 class="text-center mb-2">Kies een antwoord:</h3>
+        <div class="grid grid-cols-2 grid-rows-2 gap-2 p-2">
+            @foreach($multipleOptions as $key=>$option)
+                <x-button variant="answer" size="small" :arrow="false" onclick="checkAnswer({{ $key }})"
+                          class="shadow">
+                    {{$key+1}}. {{ $option }}
+                </x-button>
+            @endforeach
+        </div>
     @endif
 
     <div class="my-5 flex justify-center">
         @if($partCondition[0] !== 'multiple')
-            <a href="{{ url($btnURL) }}" @if(!empty($partCondition[1])) data-condition="{{$partCondition[1]}}" @endif >
+            <a href="{{ route('nature.quests.parts.next', [$naturePark, $quest, $part]) }}"
+               @if(!empty($partCondition[1])) data-condition="{{$partCondition[1]}}" @endif >
                 <x-button>
                     @if($partCondition[0] === 'timer')
                         Volgende ({{ $partCondition[1] }})

@@ -1,5 +1,5 @@
 <section class="space-y-6">
-    <header>
+    <header class="flex flex-col gap-2">
         <h2 class="text-lg font-medium text-[--color-black]">
             {{ __('Verwijder Account') }}
         </h2>
@@ -9,10 +9,12 @@
         </p>
     </header>
 
-    <x-danger-button
+    <x-button
+        :arrow="false"
+        size="small"
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Verwijder account') }}</x-danger-button>
+    >{{ __('Verwijder account') }}</x-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
@@ -43,11 +45,12 @@
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-button type="button" x-on:click="$dispatch('close')"
+                          variant="secondary" size="small" :arrow="false" class="mr-3">
                     Annuleer
-                </x-secondary-button>
+                </x-button>
 
-                <x-button variant="secondary" size="small" :arrow="false">Verwijder Account</x-button>
+                <x-button type="submit" variant="primary" size="small" :arrow="false">Verwijder Account</x-button>
             </div>
         </form>
     </x-modal>

@@ -6,10 +6,24 @@
     </x-slot>
 
     <div class="py-1">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 pt-4">
+            @if(auth()->user()->isAdmin())
+                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div class="max-w-xl">
+                        @include('profile.partials.admin-dashboard')
+                    </div>
+                </div>
+            @endif
+
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
+                </div>
+            </div>
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.join-group-form')
                 </div>
             </div>
 
@@ -25,8 +39,8 @@
                 </div>
             </div>
 
-            <section>
-                <form action="{{ route('logout') }}" method="post">
+            <section class="pb-4">
+                <form action="{{ route('logout') }}" method="post" class="inline">
                     @csrf
                     <x-button size="small" :arrow="false">
                         Uitloggen

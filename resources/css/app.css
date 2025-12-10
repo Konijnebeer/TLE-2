@@ -59,6 +59,10 @@ h3 {
     font-size: 24px;
 }
 
+button:disabled, button[disabled] {
+    background-color: #CCCCCC;
+}
+
 header {
     display: flex;
     align-items: center;
@@ -146,4 +150,9 @@ nav i {
     margin-top: -30px;
     padding: 10px;
     position: relative;
+}
+
+.social_links{
+    display: flex;
+    gap: 10px;
 }

@@ -5,12 +5,13 @@
 ])
 
 @php
-    $baseClass = 'rounded-sm';
+    $baseClass = 'rounded-sm w-full';
 
     $variantClass = [
         'primary' => 'bg-[--button-primary-color] text-[--color-white]',
         'secondary' => 'bg-[--button-secondary-color] text-[--color-white]',
-        'transparent' => 'text-[--color-black]'
+        'transparent' => 'text-[--color-black]',
+        'answer' => 'bg-[#89b934] text-[--color-black]'
     ];
 
     $sizeClass = [
@@ -22,7 +23,7 @@
 $classes = $baseClass . ' ' . $variantClass[$variant] . ' ' . $sizeClass[$size];
 @endphp
 
-<button class="{{ $classes }}">
+<button {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
     @if($arrow)
         <i class="fa-solid fa-arrow-right pl-2"></i>

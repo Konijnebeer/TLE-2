@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->role === Role::TEACHER;
     }
 
+    public function isActive(): bool
+    {
+        return $this->role !== Role::INACTIVE;
+    }
+
     /**
      * Get the attributes that should be cast.
      *

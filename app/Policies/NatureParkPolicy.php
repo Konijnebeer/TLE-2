@@ -2,12 +2,24 @@
 
 namespace App\Policies;
 
+use App\Enums\GroupRole;
 use App\Models\NaturePark;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class NatureParkPolicy
 {
+    /**
+     * Perform pre-authorization checks.
+     */
+    public function before(User $user, string $ability): bool|null
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
+    }
+
     /**
      * Determine whether the user can view any models.
      */
@@ -21,7 +33,12 @@ class NatureParkPolicy
      */
     public function view(User $user, NaturePark $naturePark): bool
     {
-        return false;
+        // Check if the user is part of the group that owns this nature park
+        // and that their role in the group is not 'guest'
+        return $user->groups()
+            ->where('groups.id', $naturePark->group_id)
+            ->wherePivot('role', '!=', GroupRole::GUEST)
+            ->exists();
     }
 
     /**

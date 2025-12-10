@@ -10,24 +10,42 @@
             </div>
         @endcan
 
-        <h1 class="mb-4">{{ $group->name }}</h1>
+        <h1 class="mb-4 text-center">{{ $group->name }}</h1>
 
         <div class="border border-gray-300 p-4 rounded-lg mb-4">
-            <h2 class="mb-2">Description</h2>
+            <h2 class="mb-2">Beschrijving</h2>
             <p class="text-gray-600">{{ $group->description }}</p>
         </div>
 
         @can('update', $group)
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
-                <h2 class="mb-2">Klas Coden</h2>
+                <h2 class="mb-2">Klas Code</h2>
                 <p class="text-gray-600">
-                    <strong>Code:</strong> {{ $group->code ?? 'No code generated' }}
+                    <strong>Code:</strong> {{ $group->code ?? 'Geen code' }}
                 </p>
                 @if($group->code_expires_at)
                     <p class="text-gray-600">
                         <strong>Geldig tot:</strong> {{ $group->code_expires_at->format('d-m-Y') }}
                     </p>
                 @endif
+                <div class="space-y-2 mt-4">
+                    @if($group->code)
+                        <form action="{{ route('groups.code.delete', $group) }}" method="POST" class="w-full"
+                              onsubmit="return confirm('Weet je zeker dat je de klas code wilt verwijderen?');">
+                            @csrf
+                            @method('DELETE')
+                            <x-button variant="primary" size="small" :arrow="false">
+                                Verwijder Klas Code
+                            </x-button>
+                        </form>
+                    @endif
+                    <form action="{{ route('groups.code.generate', $group) }}" method="POST" class="w-full">
+                        @csrf
+                        <x-button variant="secondary" size="small" :arrow="false">
+                            Genereer Nieuwe Klas Code
+                        </x-button>
+                    </form>
+                </div>
             </div>
 
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
@@ -48,59 +66,54 @@
                 @if(auth()->user()->isAdmin() && count($availableUsers) > 0)
                     <div class="mb-4 p-3 bg-gray-50 rounded border border-gray-300">
                         <h3 class="font-bold mb-2">Gebruiker Toevoegen</h3>
-                        <div class="flex gap-2 items-end">
-                            <div class="flex-1">
-                                <label for="user-select" class="block text-sm mb-1">Gebruiker</label>
-                                <select id="user-select" class="w-full border border-gray-300 rounded px-2 py-1">
-                                    <option value="">Selecteer een gebruiker...</option>
-                                    @foreach($availableUsers as $availableUser)
-                                        <option value="{{ $availableUser->id }}">
-                                            {{ $availableUser->name }} ({{ $availableUser->email }})
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div>
-                                <label for="role-select" class="block text-sm mb-1">Rol</label>
-                                <select id="role-select" class="border border-gray-300 rounded px-2 py-1">
+                        <div class="flex flex-col gap-2">
+                            <label for="user-select" class="block text-sm mb-1 font-medium">Gebruiker:</label>
+                            <select id="user-select" class="w-full border border-gray-300 rounded px-2 py-1">
+
+                                <option value="">Selecteer een gebruiker...</option>
+                                @foreach($availableUsers as $availableUser)
+                                    <option value="{{ $availableUser->id }}">
+                                        {{ $availableUser->name }} ({{ $availableUser->email }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="w-full">
+                                <label for="role-select" class="block text-sm mb-1 font-medium">Rol:</label>
+                                <select id="role-select"
+                                        class="w-full border border-gray-300 rounded px-2 py-1">
+
                                     <option value="owner">Leraar</option>
                                     <option value="member" selected>Leerling</option>
                                     <option value="guest">Gast</option>
                                 </select>
                             </div>
-                            <button
+                            <x-button
+                                :arrow="false"
+                                size="small"
+                                class="w-full"
                                 onclick="addUser({{ $group->id }})"
-                                class="px-3 py-1 bg-green-600 text-white rounded"
                             >
                                 Toevoegen
-                            </button>
+                            </x-button>
                         </div>
                     </div>
                 @endif
 
-                <table class="w-full border-collapse">
-                    <thead>
-                    <tr class="border-b-2 border-gray-400">
-                        <th class="text-left p-2">Naam</th>
-                        <th class="text-left p-2">Email</th>
-                        <th class="text-left p-2">Rol</th>
-                        <th class="text-left p-2">Toegetreden</th>
-                        <th class="text-left p-2">Laatst Bewerkt</th>
-                        <th class="text-left p-2">Acties</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="space-y-3">
                     @foreach($group->users as $user)
-                        <tr class="border-b border-gray-300" id="user-row-{{ $user->id }}">
-                            <td class="p-2">{{ $user->name }}</td>
-                            <td class="p-2">{{ $user->email }}</td>
-                            <td class="p-2">
+                        <div class="border border-gray-300 rounded-lg p-4 bg-white space-y-2"
+                             id="user-row-{{ $user->id }}">
+                            <div class="mb-3">
+                                <div class="font-bold text-lg">{{ $user->name }}</div>
+                                <div class="text-sm text-gray-600">{{ $user->email }}</div>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium text-gray-700 whitespace-nowrap">Rol:</span>
                                 @if(auth()->id() != $user->id)
-
                                     <select
-                                        class="border border-gray-300 rounded px-2 py-1 role-select"
+                                        class=" w-full border border-gray-300 rounded px-2 py-1 role-select"
                                         data-user-id="{{ $user->id }}"
-
                                     >
                                         <option value="owner"
                                                 @if($user->pivot->role->value === 'owner') selected @endif>
@@ -116,61 +129,85 @@
                                         </option>
                                     </select>
                                 @else
-                                    <span>Leraar</span>
+                                    <span class="inline-block px-2 py-1 bg-gray-100 rounded text-sm">
+                                        @if($user->pivot->role->value === 'owner')
+                                            Leraar
+                                        @elseif($user->pivot->role->value === 'member')
+                                            Leerling
+                                        @else
+                                            Gast
+                                        @endif
+                                    </span>
                                 @endif
-                            </td>
-                            <td class="p-2">{{ $user->pivot->created_at->format('d-m-Y H:i') }}</td>
-                            <td class="p-2">{{ $user->pivot->updated_at->format('d-m-Y H:i') }}</td>
-                            <td class="p-2">
-                                <div class="flex gap-2">
-                                    @if(auth()->id() != $user->id)
-                                        <button
-                                            onclick="updateUserRole({{ $group->id }}, {{ $user->id }})"
-                                            class="px-3 py-1 bg-blue-500 text-white rounded text-sm"
-                                        >
-                                            Bijwerken
-                                        </button>
-                                        <button
-                                            onclick="removeUser({{ $group->id }}, {{ $user->id }})"
-                                            class="px-3 py-1 bg-red-600 text-white rounded text-sm"
-                                        >
-                                            Verwijderen
-                                        </button>
-                                    @else
-                                        <span class="text-gray-500 text-sm italic">Je kan niet je eigen gegevens aanpassen</span>
-                                    @endif
+                            </div>
+
+
+                            <div class="flex items-center gap-2">
+                                    <span
+                                        class="text-sm font-medium text-gray-700 whitespace-nowrap">Toegetreden:</span>
+                                <span
+                                    class="text-sm text-gray-600">{{ $user->pivot->created_at->format('d-m-Y') }}</span>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                    <span
+                                        class="text-sm font-medium text-gray-700 whitespace-nowrap">Laatst Bewerkt:</span>
+                                <span
+                                    class="text-sm text-gray-600">{{ $user->pivot->updated_at->format('d-m-Y') }}</span>
+                            </div>
+
+
+                            @if(auth()->id() != $user->id)
+                                <div class="flex flex-col gap-2">
+                                    <x-button
+                                        :arrow="false"
+                                        size="small"
+                                        variant="primary"
+                                        onclick="updateUserRole({{ $group->id }}, {{ $user->id }})"
+                                        class="w-full"
+                                    >
+                                        Opslaan
+                                    </x-button>
+                                    <x-button
+                                        :arrow="false"
+                                        size="small"
+                                        variant="secondary"
+                                        onclick="removeUser({{ $group->id }}, {{ $user->id }})"
+                                        class="w-full"
+                                    >
+                                        Verwijderen
+                                    </x-button>
                                 </div>
-                            </td>
-                        </tr>
+                            @else
+                                <div class="text-gray-500 text-sm italic text-center">
+                                    Je kan niet je eigen gegevens aanpassen
+                                </div>
+                            @endif
+                        </div>
                     @endforeach
-                    </tbody>
-                </table>
+                </div>
             </div>
         @endcan
-
         @if($group->naturePark)
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
-                <h2 class="mb-2">Nature Park</h2>
-                <p class="mb-2 text-gray-600">
-                    <strong>State:</strong> {{ $group->naturePark->state }}
-                </p>
+                <h2 class="mb-2">Natuurgebied</h2>
                 <a href="{{ route('nature.show', $group->naturePark) }}">
-                    <x-button variant="primary" size="small" :arrow="false">
-                        Ga Naar Natuur Park
+                    <x-button variant="primary" size="small">
+                        Ga Naar Natuurgebied
                     </x-button>
                 </a>
             </div>
         @else
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
-                <h2 class="mb-2">natuur Park</h2>
-                <p class="text-gray-600">Nog Geen Natuur Park</p>
+                <h2 class="mb-2">Natuurgebied</h2>
+                <p class="text-gray-600">Nog Geen Natuurgebied</p>
             </div>
         @endif
 
-        <div class="flex gap-2">
+        <div class="flex gap-2 pb-4 mt-4 px-4">
             @can('update', $group)
-                <a href="{{ route('groups.edit', $group) }}">
-                    <x-button variant="secondary" size="small" :arrow="false">
+                <a href="{{ route('groups.edit', $group) }}" class="w-full">
+                    <x-button variant="primary" size="small" :arrow="false">
                         Bewerk Klas
                     </x-button>
                 </a>
@@ -178,10 +215,11 @@
 
             @can('delete', $group)
                 <form action="{{ route('groups.destroy', $group) }}" method="POST"
+                      class="inline w-full"
                       onsubmit="return confirm('Weet je zeker dat je de klas wilt verwijderen?');">
                     @csrf
                     @method('DELETE')
-                    <x-button variant="transparent" size="small" :arrow="false">
+                    <x-button variant="secondary" size="small" :arrow="false">
                         Verwijder Klas
                     </x-button>
                 </form>

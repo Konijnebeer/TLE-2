@@ -32,16 +32,74 @@ class QuestSeeder extends Seeder
             [
                 'order_index' => 2,
                 'name' => 'Check!',
-                'description' => 'Type hieronder wat je allemaal hebt gevonden in je klaslokaal en hebt uitgezet! Wanneer je alles hebt ingevuld, klik dan op volgende.',
+                'description' => 'Type hieronder wat je allemaal hebt gevonden in je klaslokaal en hebt uitgezet! Wanneer je alles hebt ingevuld, klik dan op Check.',
                 'media_url' => null,
-                'success_condition' => 'textField',
+                'success_condition' => 'input',
             ],
             [
                 'order_index' => 3,
                 'name' => 'Voldaan!',
                 'description' => 'Je hebt de eerste missie voltooid en de Stroomvreter is verslagen! Je hebt direct impact gemaakt. Jouw actie zorgt ervoor dat jullie virtuele, gloednieuwe natuurgebied verbetert.',
                 'media_url' => null,
-                'success_condition' => 'button',
+                'success_condition' => 'done',
+            ],
+        ]);
+        Quest::create([
+            'name' => 'Natuur Trivia',
+            'description' => 'Natuur Trivia test je inzicht in habitats. Door een plek te zien, weet je direct welk dier daar thuishoort en waarom de plek belangrijk is.',
+            'difficulty_level' => 2,
+            'category' => QuestCategory::NATURE,
+            'is_active' => true,
+        ])->parts()->createMany([
+            [
+                'order_index' => 1,
+                'name' => 'Doel',
+                'description' => 'Je staat in een open, zanderig gebied aan de kust. Er staan weinig bomen, maar vooral lage struikjes en droge grassoorten. Het is er vaak winderig en er zijn veel zandduinen. Welk dier is hier de baas?',
+                'media_url' => null,
+                'success_condition' => 'multiple:Bever (Bouwt dammen),Konijn (Graaft tunnels),Wild Zwijn (Woelt in bossen),Fuut (Watervogel):1'
+            ],
+            [
+                'order_index' => 2,
+                'name' => 'Voldaan!',
+                'description' => 'Konijn is het juiste antwoord! Ze zijn perfect in het graven van burchten in de zanderige duingrond. Ze eten de lage planten die daar groeien en houden zo de duinen open. Hierdoor is het Konijn superbelangrijk voor de balans van het duinlandschap!',
+                'media_url' => null,
+                'success_condition' => 'done',
+            ],
+        ]);
+        Quest::create([
+            'name' => 'Afval Speurder',
+            'description' => 'Zwerfafval is gevaarlijk voor dieren en maakt de natuur vies. Door te leren sorteren en minder plastic te gebruiken, redden we natuurgebieden en maken we ze gezonder!',
+            'difficulty_level' => 3,
+            'category' => QuestCategory::NATURE,
+            'is_active' => true,
+        ])->parts()->createMany([
+            [
+                'order_index' => 1,
+                'name' => 'Doel',
+                'description' => 'Je start met het spotten van afval in je omgeving. Kijk 2 minuten rond naar afval wat je in de buurt ziet.',
+                'media_url' => null,
+                'success_condition' => 'timer:120s',
+            ],
+            [
+                'order_index' => 2,
+                'name' => 'Check!',
+                'description' => 'Type hieronder wat je allemaal hebt gevonden in je omgeving! Wanneer je alles hebt ingevuld, klik dan op Check.',
+                'media_url' => null,
+                'success_condition' => 'input',
+            ],
+            [
+                'order_index' => 3,
+                'name' => 'Snap je het?',
+                'description' => 'Als je goed afval wilt scheiden, waar moet dan een lege plastic fles heen?',
+                'media_url' => null,
+                'success_condition' => 'multiple:Papier,GFT,Plastic/Blik,Restafval:2'
+            ],
+            [
+                'order_index' => 4,
+                'name' => 'Voldaan!',
+                'description' => 'Plastic/Blik is het juiste antwoord! Door jou kan de Plastic worden gesmolten en hergebruikt om nieuwe dingen te maken. Top!',
+                'media_url' => null,
+                'success_condition' => 'done',
             ],
         ]);
     }
