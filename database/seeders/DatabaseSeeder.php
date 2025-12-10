@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
         // Create a group
         $group = Group::factory()->create([
-            'name' => 'Schoolgroep NaN',
+            'name' => 'De Regenboog',
             'description' => 'Een schoolgroep die de natuurparken bezoekt.',
         ]);
 

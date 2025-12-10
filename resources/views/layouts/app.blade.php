@@ -100,7 +100,7 @@
                 </p>
 
                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                    @foreach($userGroups as $group)
+                    @forelse($userGroups as $group)
                         @if($group->naturePark)
                             <a href="{{ route('nature.quests', ['naturePark' => $group->naturePark->id]) }}"
                                class="block w-full p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
@@ -110,7 +110,9 @@
                                 @endif
                             </a>
                         @endif
-                    @endforeach
+                    @empty
+                        <p class="text-gray-600 mt-1">Geen klassen gvonden</p>
+                    @endforelse
                 </div>
 
                 <div class="mt-6">

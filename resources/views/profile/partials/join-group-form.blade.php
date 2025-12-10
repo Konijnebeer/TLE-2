@@ -71,7 +71,8 @@
                             </div>
 
                             @if ($group->pivot->role->value !== 'owner')
-                                <form method="post" action="{{ route('profile.groups.leave', $group) }}" class="w-full">
+                                <form method="post" action="{{ route('profile.groups.leave', $group) }}"
+                                      class="w-full">
                                     @csrf
                                     @method('delete')
                                     <x-button

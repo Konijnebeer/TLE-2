@@ -42,6 +42,9 @@
                                     <option value="user" @if($user->role->value === 'user') selected @endif>
                                         Gebruiker
                                     </option>
+                                    <option value="inactive" @if($user->role->value === 'inactive') selected @endif>
+                                        Verbannen
+                                    </option>
                                 </select>
                             @else
                                 <div class="px-3 py-2 text-sm bg-gray-100 rounded w-full">

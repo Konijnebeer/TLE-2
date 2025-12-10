@@ -39,7 +39,7 @@ Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
     // Group management routes for teachers and admins.
     Route::resource('/groups', GroupController::class)
         ->only(['create', 'store', 'show', 'edit', 'update', 'destroy'])
-        ->withoutMiddlewareFor('show', 'teacher');
+        ->withoutMiddlewareFor('show', ['teacher', 'isActive']);
 
     // Manage users within a group.
     Route::patch('/groups/{group}/users/{user}/role', [GroupController::class, 'updateUserRole'])

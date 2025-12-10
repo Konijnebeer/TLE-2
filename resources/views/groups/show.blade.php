@@ -166,7 +166,7 @@
                                         onclick="updateUserRole({{ $group->id }}, {{ $user->id }})"
                                         class="w-full"
                                     >
-                                        Bijwerken
+                                        Opslaan
                                     </x-button>
                                     <x-button
                                         :arrow="false"
@@ -190,17 +190,17 @@
         @endcan
         @if($group->naturePark)
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
-                <h2 class="mb-2">Natuur gebied</h2>
+                <h2 class="mb-2">Natuurgebied</h2>
                 <a href="{{ route('nature.show', $group->naturePark) }}">
                     <x-button variant="primary" size="small">
-                        Ga Naar Natuur Gebied
+                        Ga Naar Natuurgebied
                     </x-button>
                 </a>
             </div>
         @else
             <div class="border border-gray-300 p-4 rounded-lg mb-4">
-                <h2 class="mb-2">Natuur Park</h2>
-                <p class="text-gray-600">Nog Geen Natuur Park</p>
+                <h2 class="mb-2">Natuurgebied</h2>
+                <p class="text-gray-600">Nog Geen Natuurgebied</p>
             </div>
         @endif
 
