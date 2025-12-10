@@ -99,8 +99,35 @@ class NatureParkController extends Controller
             ->where('parts.id', $part->id)
             ->wherePivot('status', 'pending')
             ->first();
-
+        if ($part == null) {
+            abort('404');
+        }
         return view('groups.quest-part', compact('naturePark', 'quest', 'part'));
+    }
+
+    public function goToNextPart(NaturePark $naturePark, Quest $quest, Part $part)
+    {
+        $naturePark->parts()->updateExistingPivot($part->id, ['status' => 'completed']);
+
+        $newPart = Part::where('quest_id', $quest->id)
+            ->where('id', '>', $part->id)
+            ->orderBy('id')
+            ->first();
+
+        if ($newPart) {
+            $naturePark->parts()->attach($newPart->id, ['status' => 'pending']);
+        }
+
+        if ($part->success_condition !== 'done' && !empty($newPart)) {
+            return redirect()->route('nature.quests.parts', [
+                'naturePark' => $naturePark->id,
+                'quest' => $quest->id,
+                'part' => $newPart->id,
+            ]);
+        } else {
+            auth()->user()->update(['onboarding_completed' => true]);
+            return redirect()->route('home');
+        }
     }
 
     /**

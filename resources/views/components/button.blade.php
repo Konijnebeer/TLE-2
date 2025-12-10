@@ -10,7 +10,8 @@
     $variantClass = [
         'primary' => 'bg-[--button-primary-color] text-[--color-white]',
         'secondary' => 'bg-[--button-secondary-color] text-[--color-white]',
-        'transparent' => 'text-[--color-black]'
+        'transparent' => 'text-[--color-black]',
+        'answer' => 'bg-[#89b934] text-[--color-black]'
     ];
 
     $sizeClass = [

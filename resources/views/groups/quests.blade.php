@@ -7,11 +7,19 @@
         <h1 class="text-black m-4 text-center">Quests</h1>
 
         @forelse($quests as $questData)
+            @php
+                if($questData['completed'] < 1) {
+                    $partLink = route('nature.quests.show', ['naturePark' => $naturePark->id, 'quest' => $questData['quest']->id]);
+                } else {
+                    $partLink = route('nature.quests.parts', ['naturePark' => $naturePark->id, 'quest' => $questData['quest']->id, 'part' => $questData['first_pending_part']->id]);
+                }
+            @endphp
+
             <x-questbox
                 title="{{ $questData['quest']->name }}"
                 progress="{{ $questData['completed'] }}/{{ $questData['total'] }}"
                 questLink="{{ route('nature.quests.show', ['naturePark' => $naturePark->id, 'quest' => $questData['quest']->id]) }}"
-                partLink="{{ route('nature.quests.parts', ['naturePark' => $naturePark->id, 'quest' => $questData['quest']->id, 'part' => $questData['first_pending_part']->id]) }}"
+                partLink="{{ $partLink }}"
             >
                 {{--                {{ $questData['quest']->description }}--}}
             </x-questbox>

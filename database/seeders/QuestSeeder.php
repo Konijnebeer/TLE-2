@@ -66,5 +66,41 @@ class QuestSeeder extends Seeder
                 'success_condition' => 'done',
             ],
         ]);
+        Quest::create([
+            'name' => 'Afval Speurder',
+            'description' => 'Zwerfafval is gevaarlijk voor dieren en maakt de natuur vies. Door te leren sorteren en minder plastic te gebruiken, redden we natuurgebieden en maken we ze gezonder!',
+            'difficulty_level' => 3,
+            'category' => QuestCategory::NATURE,
+            'is_active' => true,
+        ])->parts()->createMany([
+            [
+                'order_index' => 1,
+                'name' => 'Doel',
+                'description' => 'Je start met het spotten van afval in je omgeving. Kijk 2 minuten rond naar afval wat je in de buurt ziet.',
+                'media_url' => null,
+                'success_condition' => 'timer:120s',
+            ],
+            [
+                'order_index' => 2,
+                'name' => 'Check!',
+                'description' => 'Type hieronder wat je allemaal hebt gevonden in je omgeving! Wanneer je alles hebt ingevuld, klik dan op Check.',
+                'media_url' => null,
+                'success_condition' => 'input',
+            ],
+            [
+                'order_index' => 3,
+                'name' => 'Snap je het?',
+                'description' => 'Als je goed afval wilt scheiden, waar moet dan een lege plastic fles heen?',
+                'media_url' => null,
+                'success_condition' => 'multiple:Papier,GFT,Plastic/Blik,Restafval:2'
+            ],
+            [
+                'order_index' => 4,
+                'name' => 'Voldaan!',
+                'description' => 'Plastic/Blik is het juiste antwoord! Door jou kan de Plastic worden gesmolten en hergebruikt om nieuwe dingen te maken. Top!',
+                'media_url' => null,
+                'success_condition' => 'done',
+            ],
+        ]);
     }
 }

@@ -21,6 +21,11 @@ Route::middleware('auth')->group(function () {
 
     // Homepage route.
     Route::get('/', [NatureParkController::class, 'slideshow'])->name('home');
+
+    //about
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 });
 
 Route::middleware(['auth', 'isActive'])->group(function () {
@@ -33,6 +38,8 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         ->name('nature.quests.show');
     Route::get('/nature/{naturePark}/quests/{quest}/parts/{part}', [NatureParkController::class, 'questPart'])
         ->name('nature.quests.parts');
+    Route::get('/nature/{naturePark}/quests/{quest}/parts/{part}/next', [NatureParkController::class, 'goToNextPart'])
+        ->name('nature.quests.parts.next');
 });
 
 Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
@@ -63,11 +70,6 @@ Route::middleware(['auth', 'teacher', 'isActive'])->group(function () {
 
     // quest management for teachers.
     Route::get('/groups.quests', [GroupController::class, 'quests'])->name('groups.quests');
-
-    //about
-    Route::get('/about', function () {
-        return view('about');
-    })->name('about');
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
