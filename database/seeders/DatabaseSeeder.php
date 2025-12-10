@@ -62,10 +62,16 @@ class DatabaseSeeder extends Seeder
         $naturePark = $group->naturePark;
 
         // Get the first part from the first quest
-        $firstPart = Part::orderBy('quest_id')->orderBy('order_index')->first();
+        $firstPartFirstQuest = Part::where('quest_id', 1)->orderBy('order_index')->first();
+        $firstPartSecondQuest = Part::where('quest_id', 2)->orderBy('order_index')->first();
 
-        if ($firstPart && $naturePark) {
-            $naturePark->parts()->attach($firstPart->id, ['status' => 'pending']);
+        if ($firstPartFirstQuest && $firstPartSecondQuest && $naturePark) {
+            $naturePark->parts()->attach($firstPartFirstQuest->id, ['status' => 'pending']);
+            $naturePark->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
+        }
+
+        if ($firstPartSecondQuest && $naturePark) {
+            $naturePark->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
         }
 
     }
