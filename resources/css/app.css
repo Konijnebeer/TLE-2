@@ -36,7 +36,7 @@ body {
 
     background-color: var(--background-color);
 
-    max-width: 425px;
+    max-width: 400px;
 
     margin: 0 auto 75px;
 }
@@ -95,7 +95,7 @@ nav {
     height: 75px;
     bottom: 0;
 
-    max-width: 425px;
+    max-width: 400px;
 
     padding: 10px;
 }
@@ -116,9 +116,13 @@ nav i {
 
 .popup {
     position: fixed;
-    top: 25%;
+    top: 0;
 
-    max-width: 425px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    height: 100vh;
+    max-width: 400px;
+    padding-top: 25vh;
 }
 
 .infobox-container {
@@ -152,7 +156,7 @@ nav i {
     position: relative;
 }
 
-.social_links{
+.social_links {
     display: flex;
     gap: 10px;
 }

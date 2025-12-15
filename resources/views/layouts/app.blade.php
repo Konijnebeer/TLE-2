@@ -21,15 +21,15 @@
 <body>
 
 <header>
-    <a href="{{ route('about') }}">
+    <a href="{{ route('about') }}" aria-label="Home">
         <img src="{{ url('/images/logo.png') }}" alt="">
     </a>
     @guest
         <a href="{{ route('register')  }}">Login</a>
     @endguest
     @auth
-        <a href="{{ route('profile.edit') }}">
-            Hey, {{ Auth::user()->name }}!
+        <a href="{{ route('profile.edit') }}" aria-label="Profiel">
+            <span aria-hidden="true">Hey, {{ Auth::user()->name }}!</span>
         </a>
     @endauth
 </header>
@@ -54,7 +54,7 @@
                     $naturePark = $userGroups->first()->naturePark;
                 @endphp
                 @if($naturePark)
-                    <a href="{{ route('nature.quests', ['naturePark' => $naturePark->id]) }}">
+                    <a href="{{ route('nature.quests', ['naturePark' => $naturePark->id]) }}" aria-label="Quests">
                         <i class="fa-solid fa-scroll"></i>
                     </a>
                 @else
@@ -72,16 +72,16 @@
                 </a>
             @endif
         @else
-            <a href="{{ route('login') }}">
+            <a href="{{ route('login') }}" aria-label="Login">
                 <i class="fa-solid fa-scroll"></i>
             </a>
         @endauth
 
-        <a href="{{ route('home') }}">
+        <a href="{{ route('home') }}" aria-label="Home">
             <i class="fa-solid fa-house"></i>
         </a>
 
-        <a href="{{ route('profile.edit') }}">
+        <a href="{{ route('profile.edit') }}" aria-label="Profiel">
             <i class="fa-solid fa-user"></i>
         </a>
     </nav>
@@ -103,6 +103,7 @@
                     @forelse($userGroups as $group)
                         @if($group->naturePark)
                             <a href="{{ route('nature.quests', ['naturePark' => $group->naturePark->id]) }}"
+                               aria-label="Quests"
                                class="block w-full p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                                 <h3 class="font-bold text-lg">{{ $group->name }}</h3>
                                 @if($group->description)
