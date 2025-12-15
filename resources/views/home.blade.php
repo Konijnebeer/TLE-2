@@ -1,34 +1,95 @@
 <x-app-layout>
-    <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="py-3">
+        <h1 class="text-center text-3xl">Welkom terug, {{ auth()->user()->name }}</h1>
+    </div>
 
-        <div class="carousel-container">
-            <div class="carousel-indicators">
-                @foreach ($images as $index => $image)
-                    <button type="button"
-                            data-bs-target="#photoCarousel"
-                            data-bs-slide-to="{{ $index }}"
-                            class="{{ $index == 0 ? 'active' : '' }}"
-                            aria-current="{{ $index == 0 ? 'true' : '' }}"
-                            aria-label="Slide {{ $index+1 }}"></button>
-                @endforeach
-            </div>
+    <p class="text-center">
+        @if(auth()->user()->groups->first())
+            @if(auth()->user()->groups->first()->naturePark->state < 1)
+                Jouw klas heeft nog geen punten verdiend!
+            @elseif(auth()->user()->groups->first()->naturePark->state > 1)
+                Jouw klas heeft al {{ auth()->user()->groups->first()->naturePark->state }} punten
+                verdiend!
+            @else
+                Jouw klas heeft al {{ auth()->user()->groups->first()->naturePark->state }} punt
+                verdiend!
+            @endif
+        @else
+            Je zit nog niet in een klas!
+            <a href="{{ route('profile.edit') }}">
+                <x-button class="mt-3">
+                    Voeg een klas toe
+                </x-button>
+            </a>
+        @endif
+    </p>
 
-            <div class="carousel-inner">
-                @foreach ($images as $index => $image)
-                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                        <img src="{{ asset('natuurgebied-progression/' . $image) }}" class="d-block w-100"
-                             alt="Foto {{ $index+1 }}">
-                    </div>
-                @endforeach
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+    <section class="flex flex-col gap-1 mt-5">
+        <h2 class="text-center text-2xl">Ranglijst</h2>
+        <div class="flex justify-between gap-3 text-left px-4 py-1 bg-gray-300 italic">
+            <span class="text-center min-w-5">#</span>
+            <span class="flex-1">Klas</span>
+            <span>Punten</span>
         </div>
+        @foreach($parks as $key => $park)
+            <article
+                class="flex justify-between gap-3 text-left px-4 py-1
+                @if($park->getAttributes() === auth()->user()->groups->first()->naturePark->getAttributes()) border-2 border-solid border-amber-400 bg-amber-100 @elseif($key % 2 === 0) bg-gray-100 @else bg-gray-200 @endif"
+                tabindex="0"
+                aria-label="Ranglijst positie {{ $key + 1 }}. {{ $park->group->name }} met {{ $park->state }} punten.">
+                <span class="text-center min-w-5">{{ $key + 1 }}</span>
+                <span class="flex-1">{{ $park->group->name }}</span>
+                <span>{{ $park->state }}</span>
+            </article>
+            @php
+                if($park->getAttributes() === auth()->user()->groups->first()->naturePark->getAttributes()) {
+                    $ownParkPosition = $key + 1;
+                }
+            @endphp
+        @endforeach
+    </section>
+
+    <section class="mt-2">
+        <h2 class="text-center text-2xl">Jouw positie</h2>
+        @if(auth()->user()->groups->first())
+            @php
+                $ownPark = auth()->user()->groups->first()->naturePark;
+
+                if($ownParkPosition > 1) {
+                    $sortedParks = $parks->all();
+                    $higherPark = $sortedParks[$ownParkPosition - 2]; // I have no idea why -2, but it works.
+
+                    $pointsAway = $higherPark->state - $ownPark->state;
+                }
+            @endphp
+            <article
+                class="flex justify-between gap-3 text-left px-4 py-1 border-2 border-solid border-amber-400 bg-amber-100"
+                tabindex="0"
+                aria-label="Jouw Ranglijst positie {{ $ownParkPosition }}. {{ $ownPark->group->name }} met {{ $ownPark->state }} punten.">
+                <span class="text-center min-w-5">{{ $ownParkPosition }}</span>
+                <span class="flex-1">{{ $ownPark->group->name }}</span>
+                <span>{{ $ownPark->state }}</span>
+            </article>
+            @if(!empty($pointsAway))
+                <p class="text-center italic text-sm">Je bent {{ $pointsAway }}
+                    @if($pointsAway === 0 || $pointsAway > 1)
+                        punten
+                    @else
+                        punt
+                    @endif verwijderd
+                    van een hogere
+                    positie!</p>
+            @else
+                <p class="text-center italic text-sm">
+                    Je staat op nummer 1! Blijf zo doorgaan!
+            @endif
+        @endif
+    </section>
+
+    <section class="mt-5">
+        <h2 class="text-center text-2xl">Jouw natuurgebied</h2>
+        <img src="{{ asset('natuurgebied-progression/' . $natureImages[$ownPark->state]) }}"
+             alt="Natuurgebied met voortgang {{ $ownPark->state }}">
 
         @if(auth()->user()->onboarding_completed === false && !auth()->user()->isAdmin() && auth()->user()->isActive())
             <div class="popup">
@@ -63,8 +124,5 @@
                 </x-infobox>
             </div>
         @endif
-
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </section>
 </x-app-layout>

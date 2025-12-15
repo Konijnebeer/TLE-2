@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\NaturePark;
 use App\Models\Part;
 use App\Models\Quest;
@@ -14,14 +15,15 @@ class NatureParkController extends Controller
 {
     public function slideshow()
     {
-        // gebruik de map natuurgebied-progression als variabel $files om de images in te laden
-        $files = File::files(public_path('natuurgebied-progression'));
-        $images = [];
-        // for loop om alle fotos op te halen uit de map carousel
-        foreach ($files as $file) {
-            $images[] = $file->getFilename();
+        $parks = NaturePark::orderByDesc('state')->limit(5)->get();
+        $natureFiles = File::files(public_path('natuurgebied-progression'));
+        $natureImages = [];
+
+        foreach ($natureFiles as $file) {
+            $natureImages[] = $file->getFilename();
         }
-        return view('home')->with('images', $images);
+
+        return view('home', compact('parks', 'natureImages'));
     }
 
     /**
@@ -126,6 +128,9 @@ class NatureParkController extends Controller
             ]);
         } else {
             auth()->user()->update(['onboarding_completed' => true]);
+
+            $naturePark->increment('state');
+
             return redirect()->route('home');
         }
     }

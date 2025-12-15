@@ -18,7 +18,7 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company() . ' Group',
+            'name' => fake()->company(),
             'description' => fake()->sentence(),
             'code' => strtoupper(fake()->bothify('???###')),
             'code_expires_at' => now()->addDays(21),

@@ -18,6 +18,7 @@
 
     <x-button
         onclick="event.stopPropagation(); window.location='{{ $partLink }}'"
+        aria-label="Ga naar de quest {{ $title }}"
 
     >
         Ga naar quest
