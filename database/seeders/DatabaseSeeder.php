@@ -34,8 +34,28 @@ class DatabaseSeeder extends Seeder
 
         // Create a group
         $group = Group::factory()->create([
-            'name' => 'De Regenboog',
-            'description' => 'Een schoolgroep die de natuurparken bezoekt.',
+            'name' => 'De Regenboog H1A',
+            'description' => 'Leren en ondersteuning met plezier!',
+        ]);
+
+        $group2 = Group::factory()->create([
+            'name' => 'Helinium V1W',
+            'description' => 'Heel uniek, net als jij!'
+        ]);
+
+        $group3 = Group::factory()->create([
+            'name' => 'Leerfabriek H1B',
+            'description' => 'Leren bovenop!'
+        ]);
+
+        $group4 = Group::factory()->create([
+            'name' => 'Waterlelie V2A',
+            'description' => 'Spetter spetter spat...'
+        ]);
+
+        $group5 = Group::factory()->create([
+            'name' => 'Middelbaar H1V',
+            'description' => 'Gewoon een middelbare...'
         ]);
 
         // Create teacher user with teacher role
@@ -60,6 +80,12 @@ class DatabaseSeeder extends Seeder
 
         // Get the nature park created by the group factory and assign the first quest part
         $naturePark = $group->naturePark;
+        $naturePark->increment('state', 1);
+
+        $naturePark2 = $group2->naturePark;
+        $naturePark2->increment('state', 4);
+        $naturePark3 = $group3->naturePark;
+        $naturePark3->increment('state', 2);
 
         // Get the first part from the first quest
         $firstPartFirstQuest = Part::where('quest_id', 1)->orderBy('order_index')->first();

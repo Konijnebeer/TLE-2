@@ -23,7 +23,7 @@
                         </p>
 
                         <div class="mb-4">
-                            <strong>Members:</strong> {{ $group->total_users_count }} Totaal
+                            <strong>Leden:</strong> {{ $group->total_users_count }} Totaal
                             <ul class="mt-2 ml-6 list-disc">
                                 <li>Leeraren: {{ $group->owners_count }}</li>
                                 <li>Leerlingen: {{ $group->members_count }}</li>

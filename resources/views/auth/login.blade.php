@@ -45,7 +45,7 @@
                 Log in
             </x-button>
             <div>
-                <a class="underline text-sm text-black dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue dark:focus:ring-offset-gray-800" href="{{ route('register') }}">{{ __('Nieuw hier? Registereren') }}
+                <a class="underline text-sm text-black dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue dark:focus:ring-offset-gray-800" href="{{ route('register') }}">{{ __('Nieuw hier? Registreren') }}
                 </a>
             </div>
         </div>
