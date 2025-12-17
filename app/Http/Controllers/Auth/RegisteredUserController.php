@@ -67,7 +67,7 @@ class RegisteredUserController extends Controller
         if ($request->filled('code')) {
             $group = Group::where('code', $request->code)->first();
             if ($group && !$group->isCodeExpired()) {
-                $group->users()->attach($user->id, ['role' => GroupRole::GUEST]);
+                $group->users()->attach($user->id, ['role' => GroupRole::MEMBER]);
             }
         }
 
