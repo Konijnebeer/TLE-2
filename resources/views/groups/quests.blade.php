@@ -2,7 +2,7 @@
 
     <section
         id="mainSection"
-        class="bg-[url('/public/images/hooglander.png')] pb-5 bg-no-repeat bg-cover bg-center overflow-hidden"
+        class="bg-[url('/public/images/hooglander.png')] pb-5 bg-no-repeat bg-cover bg-center overflow-hidden min-h-[calc(100vh-175px)]"
     >
         <h1 class="text-black m-4 text-center">Quests</h1>
 

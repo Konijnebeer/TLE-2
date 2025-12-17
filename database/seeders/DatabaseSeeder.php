@@ -87,6 +87,9 @@ class DatabaseSeeder extends Seeder
         $naturePark3 = $group3->naturePark;
         $naturePark3->increment('state', 2);
 
+        $naturePark4 = $group4->naturePark;
+        $naturePark5 = $group5->naturePark;
+
         // Get the first part from the first quest
         $firstPartFirstQuest = Part::where('quest_id', 1)->orderBy('order_index')->first();
         $firstPartSecondQuest = Part::where('quest_id', 2)->orderBy('order_index')->first();
@@ -96,6 +99,22 @@ class DatabaseSeeder extends Seeder
             $naturePark->parts()->attach($firstPartFirstQuest->id, ['status' => 'pending']);
             $naturePark->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
             $naturePark->parts()->attach($firstPartThirdQuest->id, ['status' => 'pending']);
+
+            $naturePark2->parts()->attach($firstPartFirstQuest->id, ['status' => 'pending']);
+            $naturePark2->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
+            $naturePark2->parts()->attach($firstPartThirdQuest->id, ['status' => 'pending']);
+
+            $naturePark3->parts()->attach($firstPartFirstQuest->id, ['status' => 'pending']);
+            $naturePark3->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
+            $naturePark3->parts()->attach($firstPartThirdQuest->id, ['status' => 'pending']);
+
+            $naturePark4->parts()->attach($firstPartFirstQuest->id, ['status' => 'pending']);
+            $naturePark4->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
+            $naturePark4->parts()->attach($firstPartThirdQuest->id, ['status' => 'pending']);
+
+            $naturePark5->parts()->attach($firstPartFirstQuest->id, ['status' => 'pending']);
+            $naturePark5->parts()->attach($firstPartSecondQuest->id, ['status' => 'pending']);
+            $naturePark5->parts()->attach($firstPartThirdQuest->id, ['status' => 'pending']);
         }
     }
 }
