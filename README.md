@@ -1,64 +1,78 @@
-# TLE-2
+# Detective Green
+A web-app that encourages first-year high school students to take real action for nature!
 
-This is a schoolproject for the client [Natuurmonumenten](https://www.natuurmonumenten.nl/)
-via [iO](https://www.iodigital.com/nl)
+:mag: Check out the live version: https://team2.hr-cmgt-tle2-laravel.nl
 
-## Setup
+<details>
+    <summary>Table of Contents</summary>
+    <ol>
+        <li><a href="#about-this-project">About this project</a></li>
+        <li><a href="#functionality">Functionality</a></li>
+        <li>
+            <a href="#getting-started">Getting started</a>
+            <ol>
+                <li><a href="#requirements">Requirements</a></li>
+                <li><a href="#installation">Installation</a></li>
+            </ol>
+        </li>
+    </ol>
+</details>
 
-1. Clone the repository.
-2. Open your terminal and run `composer run setup`. 
-3. Ensure that *Laravel Herd* sees your project and is secure.
-4. Run `npm run dev`.
-5. Go to `tle-2.test`.
 
-## Concept
 
-The app was created to engage and inform a younger audience about current themes related to climate and nature.
+## About this project
+Detective Green is the web-app to get first-year high school students excited about nature again! By collaborating with your class on various quests, they'll truly feel like their actions are making an impact!
 
-## ERD & Wireframes
+This project was commissioned by and created in collaboration with Natuurmonumenten and iO. Natuurmonumenten struggles to reach young people between the ages of 12 and 21. Detective Green ensures that Natuurmonumenten can raise awareness of nature by encouraging green behavior and the making an impact on nature through a curriculum for high schools.
 
-[Figma](https://www.figma.com/design/yTp2zN4YumlJ1DPWo0WqoX/TLE-2?node-id=0-1&t=g3tiqPHoMxn2j74G-1)
-[DrawSQL](https://drawsql.app/teams/hoogeschool-rotterdam/diagrams/natuurmonumenten/embed)
 
-## Code Rules & Conventions
 
-[How to work with GitHub in PhpStorm](https://www.jetbrains.com/help/phpstorm/work-with-github-pull-requests.html)
+## Functionality
+Detective Green is packed with cool features to easily integrate the web-app into your current curriculum!
+### Quests
+- Complete a variety of Quests, together with your class or at home!
+- Discover unique types of Quests, from impact-making to multiple-choice questions!
+- Receive rewards for completing Quests!
+### Rewards
+- Get points for completing Quests!
+- Improve your own digital Nature Reserve by cleaning it and adding more plants and biodiversity!
+### Leaderboard
+- Climb the global leaderboard by collecting more points with your class!
+- Become the best Green Detective!
+### Management for Teachers
+- Easily create new classes!
+- Generate class-codes for your students to join your class!
+- Manage members of your class by assigning roles like Student, Teacher or Guest!
 
-[laravel Best Practises & Conventions](https://github.com/alexeymezenin/laravel-best-practices)
 
-### Rules
 
-- Write clear commit messages.
-- Use feature branches.
-    - Make sure to use `feature/story-#` as naming conventions.
-- Use Pull Requests.
-    - You can link an **issue** with `Closes: #issue-number` in the PR description.
-- When you create a Model you do this with the `php artisan make:model Model --all`
-    - This will automatically give you a migration, factory, seeder and controller.
-- Review each other's code on Pull Requests.
-- Keep the codebase clean and remove unused code.
-- Document important parts of the codebase.
-- Whenever you want to change the Database Schema you **always** do this via a new migration.
-- [Enums are php Enums because of this (we don't use strings during checks but the Enum).](https://medium.com/@zulfikarditya/using-php-enums-in-laravel-12-a-comprehensive-guide-af75689f88e8)
-
-## Code snippets & Commands
-
-```pwsh
-# Run setup
-composer run setup
-
-# Run Vite dev server
-npm run dev
-
-# Run Vite Build
-npm run build
+## Getting started
+If you want to run the project locally, use the following steps.
+### Requirements
+- PHP 8.2+
+- Composer
+- Node.js & NPM
+- SQLite
+- (If on Windows) Laravel Herd
+### Installation
+1. Clone the repository
+```sh
+git clone https://github.com/Konijnebeer/TLE-2.git detective-green
+cd detective-green
 ```
-
-When reviewing, you can add comments within a Pull Request
-and directly suggest changes with the following snippets:
-
-\`\`\`suggestion
-
-Your suggestion for this code line
-
-\```
+2. Setup dependencies, environment, database and front-end assets
+```sh
+composer run setup
+```
+3. Setup local test server
+```sh
+npm run dev
+```
+- If you're using Windows:
+    - Make sure the project is in the Laravel Herd sites directory and SSL is enabled for it
+    - View the web-app by going to https://detective-green.test
+- If you're not on Windows:
+    ```sh
+    php artisan serve
+    ```
+    View the web-app by going to http://localhost:8000
