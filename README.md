@@ -1,4 +1,4 @@
-# Detective Green
+# 🕵️ Detective Green
 A web-app that encourages first-year high school students to take real action for nature!
 
 :mag: Check out the live version: https://team2.hr-cmgt-tle2-laravel.nl
@@ -20,6 +20,7 @@ A web-app that encourages first-year high school students to take real action fo
             <ol>
                 <li><a href="#build-with">Build with</a></li>
                 <li><a href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
+                <li><a href="#usage">Usage</a></li>
             </ol>
         </li>
     </ol>
@@ -93,6 +94,7 @@ npm run dev
 
 
 ## :hammer_and_wrench: How does it work?
+Detective Green has a rich documentation of it's codebase!
 ### Build with
 Detective Green is build using the following technologies:
 - [![Laravel][Laravel.com]][Laravel-url]
@@ -205,6 +207,21 @@ erDiagram
     %% Logical relation (no DB FK in migrations)
     USERS ||..|| PASSWORD_RESET_TOKENS : "email -> email (logical)"
 ```
+### Usage
+Detective Green has a lot of classes, functions and other code! This chapter dives into the most important ones to understand how the codebase works!
+#### Classses
+- `NatureParkController` is reponsible for showing the Nature Reserve on the homepage and all logic related to completing Quests.
+- `GroupController` is responsible for the connection between groups & users, managing invite codes and managing users in the group.
+#### Functions
+- `slideshow()` in `NatureParkController` is responsible for showing the correct 'state' of the Nature Reserve based on how many points you have collected as a group.
+- `questShow()` in `NatureParkController` is responsible for showing the 'Why?' (Why are you doing this Quest, what is the impact this will have?) part of a Quest.
+- `questPart()` in `NatureParkController` is responsible for showing all other parts of a Quest, like the multiple choice questions or timers.
+- `codeGenerate()` in `GroupController` is responsible for generating a new code that teachers can share with their class to join the group.
+- `task_timer.js` is responsible for keeping the 'Next' button disabled in a Quest where you need to do something for a certain amount of time if the time has not yet passed.
+#### Nice to knows
+- When a user has never completed a Quest before, it's `onboarding_completed` field in the `users` table is `false` (0). If a user completes any Quest, this field will be set to `true` (1). When `onboarding_complete` is `false`, a popup will be displayed on the homescreen to prompt users to complete their first Quest.
+- When a user leaves all their groups, they won't be able to complete Quests anymore. When trying to go to the Quests-page, the user will be prompted to join a class using a class-code.
+- When joining a group, you will always become a Guest of that group. A member that has (at least) the Teacher role will need to manually review each user and update their role to Student. This is to prevent the class-code being leaked and random people being able to mess with the group.
 
 
 
