@@ -6,17 +6,17 @@ A web-app that encourages first-year high school students to take real action fo
 <details>
     <summary>Table of Contents</summary>
     <ol>
-        <li><a href="#:information_source:-about-this-project">About this project</a></li>
-        <li><a href="#:sparkles:-functionality">Functionality</a></li>
+        <li><a href="#information_source-about-this-project">About this project</a></li>
+        <li><a href="#sparkles-functionality">Functionality</a></li>
         <li>
-            <a href="#:rocket:-getting-started">Getting started</a>
+            <a href="#rocket-getting-started">Getting started</a>
             <ol>
                 <li><a href="#requirements">Requirements</a></li>
                 <li><a href="#installation">Installation</a></li>
             </ol>
         </li>
         <li>
-            <a href="#:hammer_and_wrench:-how-does-it-work">How does it work?</a>
+            <a href="#hammer_and_wrench-how-does-it-work">How does it work?</a>
             <ol>
                 <li><a href="#build-with">Build with</a></li>
                 <li><a href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
