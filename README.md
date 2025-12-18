@@ -1,5 +1,5 @@
 # 🕵️ Detective Green
-A web-app that encourages first-year high school students to take real action for nature!
+A web-app that encourages first-year middle school students to take real action for nature!
 
 :mag: Check out the live version: https://team2.hr-cmgt-tle2-laravel.nl
 
@@ -36,9 +36,9 @@ A web-app that encourages first-year high school students to take real action fo
 
 
 ## :information_source: About this project
-Detective Green is the web-app to get first-year high school students excited about nature again! By collaborating with your class on various quests, they'll truly feel like their actions are making an impact!
+Detective Green is the web-app to get first-year middle school students excited about nature again! By collaborating with your class on various quests, they'll truly feel like their actions are making an impact!
 
-This project was commissioned by and created in collaboration with Natuurmonumenten and iO. Natuurmonumenten struggles to reach young people between the ages of 12 and 21. Detective Green ensures that Natuurmonumenten can raise awareness of nature by encouraging green behavior and the making an impact on nature through a curriculum for high schools.
+This project was commissioned by and created in collaboration with Natuurmonumenten and iO. Natuurmonumenten struggles to reach young people between the ages of 12 and 21. Detective Green ensures that Natuurmonumenten can raise awareness of nature by encouraging green behavior and the making an impact on nature through a curriculum for middle schools.
 
 
 
