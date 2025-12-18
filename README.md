@@ -23,6 +23,7 @@ A web-app that encourages first-year high school students to take real action fo
                 <li><a href="#usage">Usage</a></li>
             </ol>
         </li>
+        <li><a href="#flying_saucer-deployment">Deployment</a></li>
     </ol>
 </details>
 
@@ -222,6 +223,9 @@ Detective Green has a lot of classes, functions and other code! This chapter div
 - When a user has never completed a Quest before, it's `onboarding_completed` field in the `users` table is `false` (0). If a user completes any Quest, this field will be set to `true` (1). When `onboarding_complete` is `false`, a popup will be displayed on the homescreen to prompt users to complete their first Quest.
 - When a user leaves all their groups, they won't be able to complete Quests anymore. When trying to go to the Quests-page, the user will be prompted to join a class using a class-code.
 - When joining a group, you will always become a Guest of that group. A member that has (at least) the Teacher role will need to manually review each user and update their role to Student. This is to prevent the class-code being leaked and random people being able to mess with the group.
+
+## :flying_saucer: Deployment
+Detective Green has been deployed on a VPS provided by Rotterdam University of Applied Sciences that is running Ubuntu 24.04 with Nginx. [These](https://github.com/HR-CMGT/PRG05-2025-2026/blob/main/deployment-tle/README.md) instructions where used to deploy the project.
 
 
 
