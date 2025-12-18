@@ -6,17 +6,17 @@ A web-app that encourages first-year high school students to take real action fo
 <details>
     <summary>Table of Contents</summary>
     <ol>
-        <li><a href="#about-this-project">About this project</a></li>
-        <li><a href="#functionality">Functionality</a></li>
+        <li><a href="#:information_source:-about-this-project">About this project</a></li>
+        <li><a href="#:sparkles:-functionality">Functionality</a></li>
         <li>
-            <a href="#getting-started">Getting started</a>
+            <a href="#:rocket:-getting-started">Getting started</a>
             <ol>
                 <li><a href="#requirements">Requirements</a></li>
                 <li><a href="#installation">Installation</a></li>
             </ol>
         </li>
         <li>
-            <a href="#how-does-it-work">How does it work?</a>
+            <a href="#:hammer_and_wrench:-how-does-it-work">How does it work?</a>
             <ol>
                 <li><a href="#build-with">Build with</a></li>
                 <li><a href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
@@ -33,14 +33,14 @@ A web-app that encourages first-year high school students to take real action fo
 
 
 
-## ℹ️ About this project
+## :information_source: About this project
 Detective Green is the web-app to get first-year high school students excited about nature again! By collaborating with your class on various quests, they'll truly feel like their actions are making an impact!
 
 This project was commissioned by and created in collaboration with Natuurmonumenten and iO. Natuurmonumenten struggles to reach young people between the ages of 12 and 21. Detective Green ensures that Natuurmonumenten can raise awareness of nature by encouraging green behavior and the making an impact on nature through a curriculum for high schools.
 
 
 
-## ✨ Functionality
+## :sparkles: Functionality
 Detective Green is packed with cool features to easily integrate the web-app into your current curriculum!
 ### Quests
 - Complete a variety of Quests, together with your class or at home!
@@ -59,7 +59,7 @@ Detective Green is packed with cool features to easily integrate the web-app int
 
 
 
-## 🚀 Getting started
+## :rocket: Getting started
 If you want to run the project locally, use the following steps.
 ### Requirements
 - PHP 8.2+
@@ -92,7 +92,7 @@ npm run dev
 
 
 
-## 🛠️ How does it work?
+## :hammer_and_wrench: How does it work?
 ### Build with
 Detective Green is build using the following technologies:
 - [![Laravel][Laravel.com]][Laravel-url]
