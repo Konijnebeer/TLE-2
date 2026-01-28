@@ -31,7 +31,7 @@ A web-app that encourages first-year middle school students to take real action 
 [![Konijnebeer](https://img.shields.io/badge/-Konijnebeer-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Konijnebeer)
 [![lisa-mao](https://img.shields.io/badge/-lisa--mao-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/lisa-mao)
 [![Noirxa](https://img.shields.io/badge/-Noirxa-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Noirxa)
-[![Semmetje11lolly](https://img.shields.io/badge/-Semmetje11lolly-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Semmetje11lolly)
+[![semvde](https://img.shields.io/badge/-semvde-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/semvde)
 
 
 
