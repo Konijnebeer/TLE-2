@@ -21,7 +21,7 @@ class QuestController extends Controller
      */
     public function create()
     {
-        //
+        return view('quest.create');
     }
 
     /**
@@ -29,7 +29,19 @@ class QuestController extends Controller
      */
     public function store(StoreQuestRequest $request)
     {
-        //
+
+
+        $validated = $request->validated();
+
+        $quest = Quest::create($validated);
+
+
+        $quest->save();
+
+
+        return redirect()->route('quests.index', ['group' => $group->id])
+            ->with('success', 'Quest created successfully!');
+
     }
 
     /**
@@ -47,7 +59,7 @@ class QuestController extends Controller
      */
     public function edit(Quest $quest)
     {
-        //
+
     }
 
     /**
