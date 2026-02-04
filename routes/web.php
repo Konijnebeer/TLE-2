@@ -81,6 +81,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 
     // Quest management for admins.
+Route::patch('/quest/{quest}/toggle', [QuestController::class, 'changeQuestActivity' ])->name('admin.quests.activity');
     Route::resource('/quests', QuestController::class)
         ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::resource('/quests.parts', PartController::class)

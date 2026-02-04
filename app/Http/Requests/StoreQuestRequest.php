@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Quest;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreQuestRequest extends FormRequest
@@ -11,7 +13,7 @@ class StoreQuestRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+            return Gate::authorize('create', Quest::class)->allowed();
     }
 
     /**
@@ -22,7 +24,10 @@ class StoreQuestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|min:3|max:100',
+            'description' => 'required|min:10|max:300',
+            'difficulty_level' => 'required|in:1,2,3',
+            'category' => 'required'
         ];
     }
 }

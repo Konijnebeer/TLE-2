@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
 use App\Models\Quest;
 use App\Http\Requests\StoreQuestRequest;
 use App\Http\Requests\UpdateQuestRequest;
+use function Laravel\Prompts\error;
+
 
 class QuestController extends Controller
 {
@@ -13,7 +16,8 @@ class QuestController extends Controller
      */
     public function index()
     {
-        return view('quest.index');
+        $quests = Quest::latest()->get();
+        return view('quest.index', compact('quests'));
     }
 
     /**
@@ -39,7 +43,7 @@ class QuestController extends Controller
         $quest->save();
 
 
-        return redirect()->route('quests.index', ['group' => $group->id])
+        return redirect()->route('quests.index', ['quest' => $quest->id])
             ->with('success', 'Quest created successfully!');
 
     }
@@ -76,5 +80,18 @@ class QuestController extends Controller
     public function destroy(Quest $quest)
     {
         //
+    }
+
+    /**
+     * Change activity of quest
+     */
+    public function changeQuestActivity(Quest $quest)
+    {
+        $quest->is_active = $quest->is_active ? 0 : 1;
+        $quest->save();
+
+        return redirect()->route('quests.index', ['quest' => $quest->id])
+            ->with('success', 'Quest created successfully!');
+
     }
 }
