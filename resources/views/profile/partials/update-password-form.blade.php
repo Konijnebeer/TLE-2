@@ -1,3 +1,55 @@
+{{--<section>--}}
+{{--    <header class="flex flex-col gap-2">--}}
+{{--        <h2 class="text-lg font-medium text-[--color-black]">--}}
+{{--            {{ __('Veiligheid') }}--}}
+{{--        </h2>--}}
+
+{{--        <p class="mt-1 text-sm">--}}
+{{--            {{ __('Zorg voor een sterk wachtwoord met minimaal 8 karakters.') }}--}}
+{{--        </p>--}}
+{{--    </header>--}}
+
+{{--    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">--}}
+{{--        @csrf--}}
+{{--        @method('put')--}}
+
+{{--        <div>--}}
+{{--            <x-input-label for="update_password_current_password" :value="__('Huidig Wachtwoord')"/>--}}
+{{--            <x-text-input id="update_password_current_password" name="current_password" type="password"--}}
+{{--                          class="mt-1 block w-full" autocomplete="current-password"/>--}}
+{{--            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2"/>--}}
+{{--        </div>--}}
+
+{{--        <div>--}}
+{{--            <x-input-label for="update_password_password" :value="__('Nieuw Wachtwoord')"/>--}}
+{{--            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full"--}}
+{{--                          autocomplete="new-password"/>--}}
+{{--            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2"/>--}}
+{{--        </div>--}}
+
+{{--        <div>--}}
+{{--            <x-input-label for="update_password_password_confirmation" :value="__('Herhaal Wachtwoord')"/>--}}
+{{--            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password"--}}
+{{--                          class="mt-1 block w-full" autocomplete="new-password"/>--}}
+{{--            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2"/>--}}
+{{--        </div>--}}
+
+{{--        <div class="flex items-center gap-4">--}}
+{{--            <x-button size="small" :arrow="false">Opslaan</x-button>--}}
+
+{{--            @if (session('status') === 'password-updated')--}}
+{{--                <p--}}
+{{--                    x-data="{ show: true }"--}}
+{{--                    x-show="show"--}}
+{{--                    x-transition--}}
+{{--                    x-init="setTimeout(() => show = false, 2000)"--}}
+{{--                    class="text-sm text-gray-600 dark:text-gray-400"--}}
+{{--                >{{ __('Saved.') }}</p>--}}
+{{--            @endif--}}
+{{--        </div>--}}
+{{--    </form>--}}
+{{--</section>--}}
+
 <section>
     <header class="flex flex-col gap-2">
         <h2 class="text-lg font-medium text-[--color-black]">
@@ -9,7 +61,8 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    {{-- De actie is naar # gezet om RouteNotFoundException [password.update] te voorkomen --}}
+    <form method="post" action="#" class="mt-6 space-y-6">
         @csrf
         @method('put')
 
@@ -44,7 +97,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Opgeslagen.') }}</p>
             @endif
         </div>
     </form>

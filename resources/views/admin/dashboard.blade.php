@@ -20,7 +20,8 @@
             </a>
 
             <!-- Quests Management Card -->
-            <a href="{{ route('quests.index') }}" class="block">
+{{--            <a href="{{ route('quests.index') }}" class="block">--}}
+            <a href="{{ route('admin.quests.index') }}" class="block">
                 <div class="border border-gray-300 p-6 rounded-lg hover:bg-gray-50 transition">
                     <h2 class="mb-2 text-xl">Quest Beheer</h2>
                     <p class="text-gray-600">Maak, bewerk en verwijder quests en hun onderdelen.</p>
