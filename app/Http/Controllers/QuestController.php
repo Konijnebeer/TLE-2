@@ -63,7 +63,7 @@ class QuestController extends Controller
      */
     public function edit(Quest $quest)
     {
-
+        return view('quest.edit', compact('quest'));
     }
 
     /**
@@ -71,7 +71,13 @@ class QuestController extends Controller
      */
     public function update(UpdateQuestRequest $request, Quest $quest)
     {
-        //
+        $validated = $request->validated();
+
+        $quest = Quest::update($validated);
+
+
+        return redirect()->route('quests.index', ['quest' => $quest->id])
+            ->with('success', 'Quest created successfully!');
     }
 
     /**

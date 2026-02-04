@@ -23,9 +23,9 @@
                         </button>
                     </form>
 
-                    <form action="{{ route('quests.edit', $quest) }}" method="POST">
+                    <a href="{{ route('quests.edit', $quest) }}">
                         @csrf
-                        @method('PUT')
+
                         <button type="submit"
                                 class="px-4 py-2 rounded-full text-secondary font-bold transition-colors duration-200 ">
 
@@ -33,7 +33,7 @@
                                 Bewerken
                             </div>
                         </button>
-                    </form>
+                    </a>
 
                     <form action="{{ route('quests.destroy', $quest) }}">
                         @csrf
