@@ -253,7 +253,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     // Jouw Quest beheer met ->names() voor de correcte route links
     Route::resource('/quests', QuestController::class)
-        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'])
         ->names('admin.quests');
 
     Route::resource('/quests.parts', PartController::class)
