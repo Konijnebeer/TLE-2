@@ -1,142 +1,3 @@
-{{--<x-app-layout>--}}
-{{--    <section class="max-w-4xl mx-auto py-8 px-4">--}}
-{{--        <h1 class="text-2xl font-bold mb-6">Nieuwe Quest Maken</h1>--}}
-
-{{--        <form method="POST" action="{{ route('admin.quests.store') }}" class="space-y-6">--}}
-{{--            @csrf--}}
-
-{{--            <div class="bg-white p-6 border rounded shadow-sm space-y-4">--}}
-{{--                <h2 class="font-bold text-indigo-600">Quest Informatie</h2>--}}
-
-{{--                <input name="name" type="text" placeholder="Naam" class="w-full border-gray-300 rounded" required />--}}
-{{--                <textarea name="description" placeholder="Beschrijving" class="w-full border-gray-300 rounded" required></textarea>--}}
-
-{{--                <div class="grid grid-cols-2 gap-4">--}}
-{{--                    <input name="difficulty_level" type="number" min="1" max="5" value="1" class="border-gray-300 rounded" />--}}
-
-{{--                    <select name="category" class="border-gray-300 rounded" required>--}}
-{{--                        <option value="">Kies een categorie...</option>--}}
-{{--                        @foreach(App\Enums\QuestCategory::cases() as $category)--}}
-{{--                            <option value="{{ $category->value }}">{{ $category->name }}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--            <div class="bg-white p-6 border rounded shadow-sm space-y-4">--}}
-{{--                <h2 class="font-bold text-indigo-600">Stappen</h2>--}}
-{{--                <div id="parts-container" class="space-y-4">--}}
-{{--                    <div class="p-4 bg-gray-50 border rounded">--}}
-{{--                        <input name="parts[0][name]" type="text" placeholder="Titel stap" class="w-full border-gray-300 rounded mb-2" required />--}}
-{{--                        <textarea name="parts[0][description]" placeholder="Uitleg" class="w-full border-gray-300 rounded mb-2" required></textarea>--}}
-
-{{--                        <input name="parts[0][success_condition]" type="hidden" class="success-condition-field" />--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <button type="button" onclick="addPart()" class="text-indigo-600 text-sm font-bold">+ Stap toevoegen</button>--}}
-{{--            </div>--}}
-
-{{--            <div class="flex justify-end">--}}
-{{--                <x-button type="submit">Quest Opslaan</x-button>--}}
-{{--            </div>--}}
-{{--        </form>--}}
-{{--    </section>--}}
-
-{{--    <script>--}}
-{{--        let count = 1;--}}
-{{--        function addPart() {--}}
-{{--            const container = document.getElementById('parts-container');--}}
-{{--            const html = `--}}
-{{--                <div class="p-4 bg-gray-50 border rounded mt-4">--}}
-{{--                    <input name="parts[${count}][name]" type="text" placeholder="Titel stap" class="w-full border-gray-300 rounded mb-2" required />--}}
-{{--                    <textarea name="parts[${count}][description]" placeholder="Uitleg" class="w-full border-gray-300 rounded mb-2" required></textarea>--}}
-
-{{--                    <input name="parts[${count}][success_condition]" type="hidden" class="success-condition-field" />--}}
-{{--                </div>`;--}}
-{{--            container.insertAdjacentHTML('beforeend', html);--}}
-{{--            count++;--}}
-{{--        }--}}
-{{--    </script>--}}
-{{--</x-app-layout>--}}
-
-{{--<?php--}}
-
-{{--namespace App\Http\Controllers;--}}
-
-{{--use App\Models\Quest;--}}
-{{--use App\Models\Part;--}}
-{{--use App\Http\Requests\StoreQuestRequest;--}}
-{{--use Illuminate\Http\Request;--}}
-{{--use Illuminate\Support\Facades\DB;--}}
-
-{{--class QuestController extends Controller--}}
-{{--{--}}
-{{--    /**--}}
-{{--     * Overzicht van alle Quests voor de admin.--}}
-{{--     */--}}
-{{--    public function index()--}}
-{{--    {--}}
-{{--        $quests = Quest::latest()->paginate(10);--}}
-{{--        return view('admin.quests.index', compact('quests'));--}}
-{{--    }--}}
-
-{{--    /**--}}
-{{--     * Toon het formulier om een nieuwe Quest te maken.--}}
-{{--     */--}}
-{{--    public function create()--}}
-{{--    {--}}
-{{--        return view('admin.quests.create');--}}
-{{--    }--}}
-
-{{--    /**--}}
-{{--     * Sla de Quest en alle bijbehorende Parts (stappen) op.--}}
-{{--     */--}}
-{{--    public function store(StoreQuestRequest $request)--}}
-{{--    {--}}
-{{--        // Haal de gevalideerde data op uit je StoreQuestRequest--}}
-{{--        $validated = $request->validated();--}}
-
-{{--        try {--}}
-{{--            DB::transaction(function () use ($validated, $request) {--}}
-{{--                // 1. Maak de Quest aan--}}
-{{--                $quest = Quest::create([--}}
-{{--                    'name' => $validated['name'],--}}
-{{--                    'description' => $validated['description'],--}}
-{{--                    'difficulty_level' => $validated['difficulty_level'],--}}
-{{--                    'category' => $validated['category'],--}}
-{{--                    'is_active' => $request->has('is_active'),--}}
-{{--                ]);--}}
-
-{{--                // 2. Maak de onderdelen (Parts) aan die bij deze Quest horen--}}
-{{--                foreach ($validated['parts'] as $index => $partData) {--}}
-{{--                    $quest->parts()->create([--}}
-{{--                        'order_index' => $index + 1,--}}
-{{--                        'name' => $partData['name'],--}}
-{{--                        'description' => $partData['description'],--}}
-{{--                        'success_condition' => $partData['success_condition'],--}}
-{{--                    ]);--}}
-{{--                }--}}
-{{--            });--}}
-
-{{--            return redirect()->route('admin.quests.index')--}}
-{{--                ->with('success', 'Quest en alle stappen zijn succesvol opgeslagen!');--}}
-
-{{--        } catch (\Exception $e) {--}}
-{{--            // Als er toch iets misgaat, krijg je een duidelijke foutmelding--}}
-{{--            return back()->withInput()->withErrors(['error' => 'Database fout: ' . $e->getMessage()]);--}}
-{{--        }--}}
-{{--    }--}}
-
-{{--    /**--}}
-{{--     * CODE VAN TEAMGENOOT: Toon een specifieke quest.--}}
-{{--     */--}}
-{{--    public function show(Quest $quest)--}}
-{{--    {--}}
-{{--        $firstPart = $quest->parts()->orderBy('order_index')->first();--}}
-{{--        return view('quest.show', compact('quest', 'firstPart'));--}}
-{{--    }--}}
-{{--}--}}
-
 <x-app-layout>
     <section class="max-w-4xl mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-800 border-b pb-4">Nieuwe Quest Bouwen</h1>
@@ -178,12 +39,13 @@
             <div class="bg-white p-6 border border-gray-300 rounded-lg shadow-sm">
                 <h2 class="font-bold mb-4 text-indigo-600 border-b pb-2 uppercase text-sm">2. Stappen (Parts)</h2>
                 <div id="parts-container" class="space-y-4">
-                    <div class="p-4 bg-gray-50 border rounded mt-4">
+                    <div class="part-item p-4 bg-gray-50 border rounded mt-4">
                         <input name="parts[0][name]" type="text" placeholder="Titel van deze stap" class="w-full border-gray-300 rounded mb-2 mt-1" required />
                         <textarea name="parts[0][description]" placeholder="Wat moet de leerling doen?" class="w-full border-gray-300 rounded mb-2 text-sm" required></textarea>
                         <input name="parts[0][success_condition]" type="hidden" value="done" />
                     </div>
                 </div>
+
                 <button type="button" onclick="addPart()" class="mt-4 text-indigo-600 font-bold text-xs hover:underline uppercase tracking-widest">
                     + Voeg nog een stap toe
                 </button>
@@ -206,11 +68,17 @@
         function addPart() {
             const container = document.getElementById('parts-container');
             const div = document.createElement('div');
-            div.className = "p-4 bg-gray-50 border rounded mt-4 animate-fadeIn";
+            div.className = "part-item p-4 bg-gray-50 border rounded mt-4 animate-fadeIn";
             div.innerHTML = `
-                <input name="parts[\\${count}][name]" type="text" placeholder="Titel van deze stap" class="w-full border-gray-300 rounded mb-2 mt-1" required />
-                <textarea name="parts[\\${count}][description]" placeholder="Wat moet de leerling doen?" class="w-full border-gray-300 rounded mb-2 text-sm" required></textarea>
-                <input name="parts[\\${count}][success_condition]" type="hidden" value="done" />
+                <input name="parts[${count}][name]" type="text" placeholder="Titel van deze stap" class="w-full border-gray-300 rounded mb-2 mt-1" required />
+                <textarea name="parts[${count}][description]" placeholder="Wat moet de leerling doen?" class="w-full border-gray-300 rounded mb-2 text-sm" required></textarea>
+                <input name="parts[${count}][success_condition]" type="hidden" value="done" />
+
+                <div class="flex justify-end mt-2">
+                    <button type="button" onclick="this.closest('.part-item').remove()" class="text-red-500 hover:text-red-700 text-xs font-bold uppercase tracking-widest">
+                        Verwijder Stap
+                    </button>
+                </div>
             `;
             container.appendChild(div);
             count++;
