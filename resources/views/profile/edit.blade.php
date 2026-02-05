@@ -1,3 +1,57 @@
+{{--<x-app-layout>--}}
+{{--    <x-slot name="header">--}}
+{{--        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">--}}
+{{--            {{ __('Profile') }}--}}
+{{--        </h2>--}}
+{{--    </x-slot>--}}
+
+{{--    <div class="py-1">--}}
+{{--        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 pt-4">--}}
+{{--            @if(auth()->user()->isAdmin())--}}
+{{--                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">--}}
+{{--                    <div class="max-w-xl">--}}
+{{--                        @include('profile.partials.admin-dashboard')--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+
+{{--            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">--}}
+{{--                <div class="max-w-xl">--}}
+{{--                    @include('profile.partials.update-profile-information-form')--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">--}}
+{{--                <div class="max-w-xl">--}}
+{{--                    @include('profile.partials.join-group-form')--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">--}}
+{{--                <div class="max-w-xl">--}}
+{{--                    @include('profile.partials.update-password-form')--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">--}}
+{{--                <div class="max-w-xl">--}}
+{{--                    @include('profile.partials.delete-user-form')--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--            <section class="pb-4">--}}
+{{--                <form action="{{ route('logout') }}" method="post" class="inline">--}}
+{{--                    @csrf--}}
+{{--                    <x-button size="small" :arrow="false">--}}
+{{--                        Uitloggen--}}
+{{--                    </x-button>--}}
+{{--                </form>--}}
+{{--            </section>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</x-app-layout>--}}
+
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -39,13 +93,22 @@
                 </div>
             </div>
 
+            {{-- De FIX: We controleren of de route bestaat voor we hem aanroepen --}}
             <section class="pb-4">
-                <form action="{{ route('logout') }}" method="post" class="inline">
-                    @csrf
-                    <x-button size="small" :arrow="false">
-                        Uitloggen
-                    </x-button>
-                </form>
+                @if (Route::has('logout'))
+                    <form action="{{ route('logout') }}" method="post" class="inline">
+                        @csrf
+                        <x-button size="small" :arrow="false">
+                            Uitloggen
+                        </x-button>
+                    </form>
+                @else
+                    <form action="#" method="post" class="inline">
+                        <x-button size="small" :arrow="false" class="opacity-50 cursor-not-allowed">
+                            Logout Route ontbreekt
+                        </x-button>
+                    </form>
+                @endif
             </section>
         </div>
     </div>

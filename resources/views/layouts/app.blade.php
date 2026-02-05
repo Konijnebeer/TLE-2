@@ -39,7 +39,7 @@
 </main>
 
 <footer>
-    <nav>
+    <nav class="flex items-center justify-center gap-x-2 py-2">
         @auth
             @php
                 // Admins can see all groups, regular users only see their groups
@@ -77,13 +77,23 @@
             </a>
         @endauth
 
+        <a href="{{ route('profile.edit') }}" aria-label="Profiel">
+            <i class="fa-solid fa-user"></i>
+        </a>
+
+        @auth
+            @if(Auth::user()->isAdmin())
+                <a href="{{ route('admin.quests.index') }}" aria-label="Quests beheren" title="Quests beheren" class="inline-flex items-center justify-center w-10 h-10 rounded-md text-black bg-transparent hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-2">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span class="sr-only">Quests beheren</span>
+                </a>
+            @endif
+        @endauth
+
         <a href="{{ route('home') }}" aria-label="Home">
             <i class="fa-solid fa-house"></i>
         </a>
 
-        <a href="{{ route('profile.edit') }}" aria-label="Profiel">
-            <i class="fa-solid fa-user"></i>
-        </a>
     </nav>
 </footer>
 

@@ -76,4 +76,12 @@ class User extends Authenticatable
             ->withPivot('role')
             ->withTimestamps();
     }
+
+    /**
+     * Get the answers for the user.
+     */
+    public function answers()
+    {
+        return $this->hasMany(\App\Models\Answer::class);
+    }
 }

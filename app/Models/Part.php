@@ -41,4 +41,12 @@ class Part extends Model
             ->withPivot('status', 'completed_at')
             ->withTimestamps();
     }
+
+    /**
+     * Get the answers for the part.
+     */
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

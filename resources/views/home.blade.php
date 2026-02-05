@@ -93,8 +93,13 @@
     @if(auth()->user()->groups->first())
         <section class="mt-5">
             <h2 class="text-center text-2xl">Jouw natuurgebied</h2>
-            <img src="{{ asset('natuurgebied-progression/' . $natureImages[$ownPark->state]) }}"
-                 alt="Natuurgebied met voortgang {{ $ownPark->state }}">
+            @if(isset($natureImages[$ownPark->state]))
+                <img src="{{ asset('natuurgebied-progression/' . $natureImages[$ownPark->state]) }}"
+                     alt="Natuurgebied met voortgang {{ $ownPark->state }}">
+            @else
+                <img src="{{ asset('natuurgebied-progression/' . $natureImages[0]) }}"
+                     alt="Natuurgebied met voortgang 0">
+            @endif
 
             @if(auth()->user()->onboarding_completed === false && !auth()->user()->isAdmin() && auth()->user()->isActive())
                 <div class="popup">
