@@ -259,6 +259,20 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('/quests.parts', PartController::class)
         ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
         ->names('admin.parts');
+
+    Route::get('/quests/{quest}/parts/{part}/answers', [\App\Http\Controllers\Admin\PartAnswerController::class, 'index'])->name('admin.parts.answers');
+});
+
+// Temporary debug route to inspect a Part record (REMOVE in production)
+Route::get('/debug/part/{id}', function ($id) {
+    $part = \App\Models\Part::findOrFail($id);
+    return response()->json([
+        'id' => $part->id,
+        'type' => $part->type,
+        'options' => $part->options,
+        'correct_answer' => $part->correct_answer,
+        'success_condition' => $part->success_condition,
+    ]);
 });
 
 // Laad standaard Laravel auth (login, register, etc.)

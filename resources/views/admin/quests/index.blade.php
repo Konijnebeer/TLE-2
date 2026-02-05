@@ -13,32 +13,38 @@
             </div>
         @endif
 
-        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+        <div class="bg-white shadow overflow-x-auto sm:rounded-md">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Naam</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Categorie</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Acties</th>
+                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Acties</th>
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                 @forelse($quests as $quest)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $quest->name }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $quest->category }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-6 py-4">{{ $quest->name }}</td>
+                        <td class="px-6 py-4">
                                 <span class="px-2 py-1 text-xs rounded-full {{ $quest->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                     {{ $quest->is_active ? 'Actief' : 'Inactief' }}
                                 </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('admin.quests.show', $quest) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Bekijken</a>
-                            <form action="{{ route('admin.quests.destroy', $quest) }}" method="POST" class="inline">
-                                @csrf @method('DELETE')
-                                <button class="text-red-600 hover:text-red-900">Verwijderen</button>
-                            </form>
+                        <td class="px-2 py-2 align-top">
+                            <div class="flex flex-col gap-2 w-full">
+                                <a href="{{ route('admin.quests.show', $quest) }}" class="inline-flex items-center w-full px-2 py-1 bg-indigo-600 text-white rounded text-xs font-semibold shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition justify-center" title="Bekijk quest">
+                                    <i class="fa-solid fa-eye mr-1"></i>
+                                    Bekijken
+                                </a>
+                                <form action="{{ route('admin.quests.destroy', $quest) }}" method="POST" class="inline w-full">
+                                    @csrf @method('DELETE')
+                                    <button class="inline-flex items-center w-full px-2 py-1 bg-red-600 text-white rounded text-xs font-semibold shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition justify-center" title="Verwijderen">
+                                        <i class="fa-solid fa-trash mr-1"></i>
+                                        Verwijderen
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

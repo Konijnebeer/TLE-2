@@ -182,6 +182,10 @@ class QuestController extends Controller
                             'order_index' => $index + 1,
                             'name' => $partData['name'],
                             'description' => $partData['description'],
+                            'type' => $partData['type'] ?? 'text',
+                            'question_text' => $partData['question_text'] ?? null,
+                            'options' => $partData['options'] ?? null,
+                            'correct_answer' => $partData['correct_answer'] ?? null,
                             'success_condition' => $partData['success_condition'],
                         ]);
                     }
@@ -202,8 +206,10 @@ class QuestController extends Controller
         }
     }
 
-    public function show(Quest $quest)
+    public function show(\App\Models\Quest $quest)
     {
+        $quest->load('parts');
+
         // If the request is for the admin panel, show the admin quest detail view
         if (request()->is('admin/quests/*')) {
             return view('admin.quests.show', compact('quest'));

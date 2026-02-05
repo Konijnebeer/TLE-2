@@ -29,7 +29,8 @@
 {{--                    <div class="p-4 bg-gray-50 border rounded">--}}
 {{--                        <input name="parts[0][name]" type="text" placeholder="Titel stap" class="w-full border-gray-300 rounded mb-2" required />--}}
 {{--                        <textarea name="parts[0][description]" placeholder="Uitleg" class="w-full border-gray-300 rounded mb-2" required></textarea>--}}
-{{--                        <input name="parts[0][success_condition]" type="text" placeholder="Conditie (bijv: done)" class="w-full border-blue-200 rounded bg-blue-50" required />--}}
+
+{{--                        <input name="parts[0][success_condition]" type="hidden" class="success-condition-field" />--}}
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--                <button type="button" onclick="addPart()" class="text-indigo-600 text-sm font-bold">+ Stap toevoegen</button>--}}
@@ -49,7 +50,8 @@
 {{--                <div class="p-4 bg-gray-50 border rounded mt-4">--}}
 {{--                    <input name="parts[${count}][name]" type="text" placeholder="Titel stap" class="w-full border-gray-300 rounded mb-2" required />--}}
 {{--                    <textarea name="parts[${count}][description]" placeholder="Uitleg" class="w-full border-gray-300 rounded mb-2" required></textarea>--}}
-{{--                    <input name="parts[${count}][success_condition]" type="text" placeholder="Conditie" class="w-full border-blue-200 rounded bg-blue-50" required />--}}
+
+{{--                    <input name="parts[${count}][success_condition]" type="hidden" class="success-condition-field" />--}}
 {{--                </div>`;--}}
 {{--            container.insertAdjacentHTML('beforeend', html);--}}
 {{--            count++;--}}
@@ -139,16 +141,6 @@
     <section class="max-w-4xl mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-800 border-b pb-4">Nieuwe Quest Bouwen</h1>
 
-        @if($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-                <ul class="list-disc list-inside">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form method="POST" action="{{ route('admin.quests.store') }}" class="space-y-8">
             @csrf
 
@@ -186,11 +178,10 @@
             <div class="bg-white p-6 border border-gray-300 rounded-lg shadow-sm">
                 <h2 class="font-bold mb-4 text-indigo-600 border-b pb-2 uppercase text-sm">2. Stappen (Parts)</h2>
                 <div id="parts-container" class="space-y-4">
-                    <div class="p-4 bg-gray-50 border border-gray-200 rounded group relative">
-                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Stap 1</span>
+                    <div class="p-4 bg-gray-50 border rounded mt-4">
                         <input name="parts[0][name]" type="text" placeholder="Titel van deze stap" class="w-full border-gray-300 rounded mb-2 mt-1" required />
                         <textarea name="parts[0][description]" placeholder="Wat moet de leerling doen?" class="w-full border-gray-300 rounded mb-2 text-sm" required></textarea>
-                        <input name="parts[0][success_condition]" type="text" placeholder="Conditie (bijv: timer:60s of done)" class="w-full border-blue-200 rounded text-sm bg-blue-50" required />
+                        <input name="parts[0][success_condition]" type="hidden" value="done" />
                     </div>
                 </div>
                 <button type="button" onclick="addPart()" class="mt-4 text-indigo-600 font-bold text-xs hover:underline uppercase tracking-widest">
@@ -215,12 +206,11 @@
         function addPart() {
             const container = document.getElementById('parts-container');
             const div = document.createElement('div');
-            div.className = "p-4 bg-gray-50 border border-gray-200 rounded mt-4 animate-fadeIn";
+            div.className = "p-4 bg-gray-50 border rounded mt-4 animate-fadeIn";
             div.innerHTML = `
-                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Stap \${count + 1}</span>
-                <input name="parts[\${count}][name]" type="text" placeholder="Titel stap" class="w-full border-gray-300 rounded mb-2 mt-1" required />
-                <textarea name="parts[\${count}][description]" placeholder="Uitleg..." class="w-full border-gray-300 rounded mb-2 text-sm" required></textarea>
-                <input name="parts[\${count}][success_condition]" type="text" placeholder="Conditie" class="w-full border-blue-200 rounded text-sm bg-blue-50" required />
+                <input name="parts[\\${count}][name]" type="text" placeholder="Titel van deze stap" class="w-full border-gray-300 rounded mb-2 mt-1" required />
+                <textarea name="parts[\\${count}][description]" placeholder="Wat moet de leerling doen?" class="w-full border-gray-300 rounded mb-2 text-sm" required></textarea>
+                <input name="parts[\\${count}][success_condition]" type="hidden" value="done" />
             `;
             container.appendChild(div);
             count++;
