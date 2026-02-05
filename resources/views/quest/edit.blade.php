@@ -12,9 +12,9 @@
 
         <h1 class="mb-4">Edit {{$quest->name}}</h1>
 
-        <form action="{{ route('quests.update') }}" method="POST" class="border border-gray-300 p-4 rounded-lg">
+        <form action="{{ route('quests.update', $quest) }}" method="POST" class="border border-gray-300 p-4 rounded-lg">
             @csrf
-
+            @method('PUT')
             <div class="mb-4">
                 <label for="name" class="block mb-2 font-bold">
                     Quest name <span class="text-red-600">*</span>

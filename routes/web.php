@@ -82,6 +82,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     // Quest management for admins.
 Route::patch('/quest/{quest}/toggle', [QuestController::class, 'changeQuestActivity' ])->name('admin.quests.activity');
+Route::get('/quest/{quest}', [QuestController::class, 'show' ])->name('admin.quests.show');
     Route::resource('/quests', QuestController::class)
         ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::resource('/quests.parts', PartController::class)

@@ -73,7 +73,7 @@ class QuestController extends Controller
     {
         $validated = $request->validated();
 
-        $quest = Quest::update($validated);
+        $quest->update($validated);
 
 
         return redirect()->route('quests.index', ['quest' => $quest->id])
@@ -85,7 +85,9 @@ class QuestController extends Controller
      */
     public function destroy(Quest $quest)
     {
-        //
+        $quest->delete();
+        return redirect()->route('quests.index')
+            ->with('success', 'Quest deleted successfully!');
     }
 
     /**
