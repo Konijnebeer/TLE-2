@@ -66,8 +66,7 @@ class QuestController extends Controller
 
     public function edit(Quest $quest)
     {
-        $quest->load('parts');
-        return view('admin.quests.edit', compact('quest'));
+        $quest->load('parts.answers.user');        return view('admin.quests.edit', compact('quest'));
     }
 
     public function update(Request $request, Quest $quest)
@@ -126,7 +125,7 @@ class QuestController extends Controller
 
     public function show(Quest $quest)
     {
-        $quest->load('parts');
+        $quest->load('parts.answers.user');
 
         if (request()->is('admin/quests/*')) {
             return view('admin.quests.show', compact('quest'));
